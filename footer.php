@@ -1,6 +1,6 @@
         <footer>
         	<div>
-        		<p>© Copyright 2050 ... Tous droits reversés.
+        		<p>© Copyright 2070 ... Tous droits reversés.
         		<p>Plus d'informations ? Contactez nous !</p>
         		<ul>
         			<li><a href="contact.php">Contact</a></li>
