@@ -1,0 +1,59 @@
+div.liste-panier {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+div.resultat {
+  background-color: #ffffff;
+  padding: 10px 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 20%;
+  margin-top: 10px;
+}
+
+td {
+  background-color: #ffffff;
+  padding: 10px 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+th {
+  border-bottom: 1px solid #bbbbbb;
+}
+
+.panier {
+  max-width: 45%;
+}
+
+td.produit div img {
+  margin-right: 20px;
+}
+
+td.produit div {
+  min-height: 64px;
+  max-height: 64px;
+  overflow: hidden;
+}
+
+td.produit p {
+  line-height: 22px;
+}
+td.quantite,
+td.prix-unitaire,
+td.total-intermediaire {
+  white-space: nowrap;
+  text-align: center;
+}
+
+.total div,
+.resume div {
+  display: flex;
+}
+
+.total div p.prix,
+.resume div p.prix {
+  margin-left: auto;
+}
