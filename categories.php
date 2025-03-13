@@ -12,7 +12,7 @@ $categories = $db->query('SELECT * FROM categorie');
     <?php foreach ($categories as $category) : ?>
         <div class="container">
             <img src="<?= $category['IMAGE'] ?>" alt="">
-            <a href="produits.php?id=<?= $category['ID'] ?>"><?= $category['LIBELLE'] ?></a>
+            <a href="produits.php?id=<?= $category['ID'] ?>">   <?= $category['LIBELLE'] ?></a>
         </div>
     <?php endforeach; ?>
 </div>
