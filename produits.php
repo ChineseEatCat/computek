@@ -1,5 +1,5 @@
 <?php
-include 'header.php'
+include 'header.php';
 ?>
 <h1>(Catégories)</h1>
 <div class="categories" style="max-width: 60%;">
@@ -95,5 +95,5 @@ include 'header.php'
 </div>
 
 <?php
-include 'footer.php'
+include 'footer.php';
 ?>

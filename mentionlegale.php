@@ -1,6 +1,6 @@
 <!-- DEBUT header.php (puis remplacer par un include de header.php) -->
 <?php
-include 'header.php'
+include 'header.php';
 ?>
 <!-- FIN header.php (remplacé par un include de header.php) -->
 
@@ -26,6 +26,6 @@ include 'header.php'
 
 <!-- DEBUT footer.php (puis remplacer par un include de footer.php) -->
 <?php
-include 'footer.php'
+include 'footer.php';
 ?>
 <!-- FIN footer.php (remplacé par un include de footer.php) -->
