@@ -2,13 +2,8 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
+$dbname="computek";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password);
-
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-echo "Connected successfully";
+$db = new PDO('mysql:host='.$servername.';dbname='.$dbname, $username, $password);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 ?>
