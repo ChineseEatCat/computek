@@ -11,7 +11,7 @@ $categories = $db->query('SELECT * FROM categorie');
 <div class="categories">
     <?php foreach ($categories as $category) : ?>
         <div class="container">
-            <img src="<?= $category['IMAGE'] ?>" alt="">
+            <img style="width: 64px" src="image/<?=$category['ID']?>/<?=$category['IMAGE']?>" alt="">
             <a href="produits.php?id=<?= $category['ID'] ?>"><?= $category['LIBELLE'] ?></a>
         </div>
     <?php endforeach; ?>
