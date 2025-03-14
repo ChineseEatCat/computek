@@ -1,99 +1,45 @@
 <?php
-include 'header.php'
+include 'header.php';
+
+include 'config/bdd.php';
+$categories = $db->query('SELECT * FROM categorie WHERE ID ='. $_GET['id']);
+$produits = $db->query('SELECT * FROM produits WHERE ID_CATEGORIE ='. $_GET['id']);
+
+foreach ($categories as $category){
+    if ($category['ID'] == $_GET['id']) {
+        $category = $category['LIBELLE'];
+    }
+}
+
 ?>
-<h1>(Catégories)</h1>
+<h1><?= isset($category) ? $category : "Produits non trouvés"?></h1>
 <div class="categories" style="max-width: 60%;">
-    <div class="produits">
-        <img src="https://picsum.photos/300/300" alt="">
-        <div>
-            <p>PC GAMER | AMD Ryzen 5 5600X 6x3.70GHz | 16Go DDR4 | RX 6750 XT 12Go | 1To M.2 SSD</p>
-            <div class="caracteristiques">
-                <ul>
-                    <li>AMD Ryzen 5 5600X 6x3.70GHz</li>
-                    <li>16Go DDR4 3200 MHz</li>
-                    <li>AMD Radeon RX 6750 XT - 12Go</li>
-                    <li>GIGABYTE A520M S2H</li>
-                    <li>1To M.2 SSD</li>
-                </ul>
+    <?php
+    $found = false;
+    foreach ($produits as $k => $produit) :
+        $found = true; ?>
+        <div class="produits">
+            <img src="<?= $produit['IMAGE'] ?>" alt="">
+            <div>
+                <p><?= $produit['MARQUE'] . " " . $produit['MODEL'] ?></p>
+                <div class="caracteristiques">
+                    <ul>
+                        <?php
+                        foreach (json_decode($produit['DESCRIPTION']) as $caracteristique) : ?>
+                            <li><?= $caracteristique ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <p><?= $produit['PRIX'] ?>€</p>
+                <button class="cart"><span><i class="bi bi-cart"></i></span> Ajouter au panier</button>
             </div>
-            <p>Prix</p>
-            <button class="cart"><span><i class="bi bi-cart"></i></span> Ajouter au panier</button>
         </div>
-    </div>
-
-    <div class="produits">
-        <img src="https://picsum.photos/300/300" alt="">
-        <div>
-            <p>PC Portable</p>
-            <div class="caracteristiques">
-                <ul>
-                    <li>AMD Ryzen 5 5600X 6x3.70GHz</li>
-                    <li>16Go DDR4 3200 MHz</li>
-                    <li>AMD Radeon RX 6750 XT - 12Go</li>
-                    <li>GIGABYTE A520M S2H</li>
-                    <li>1To M.2 SSD</li>
-                </ul>
-            </div>
-            <p>Prix</p>
-            <button class="cart"><span><i class="bi bi-cart"></i></span> Ajouter au panier</button>
-        </div>
-    </div>
-
-    <div class="produits">
-        <img src="https://picsum.photos/300/300" alt="">
-        <div>
-            <p>PC Portable</p>
-            <div class="caracteristiques">
-                <ul>
-                    <li>AMD Ryzen 5 5600X 6x3.70GHz</li>
-                    <li>16Go DDR4 3200 MHz</li>
-                    <li>AMD Radeon RX 6750 XT - 12Go</li>
-                    <li>GIGABYTE A520M S2H</li>
-                    <li>1To M.2 SSD</li>
-                </ul>
-            </div>
-            <p>Prix</p>
-            <button class="cart"><span><i class="bi bi-cart"></i></span> Ajouter au panier</button>
-        </div>
-    </div>
-
-    <div class="produits">
-        <img src="https://picsum.photos/300/300" alt="">
-        <div>
-            <p>PC Portable</p>
-            <div class="caracteristiques">
-                <ul>
-                    <li>AMD Ryzen 5 5600X 6x3.70GHz</li>
-                    <li>16Go DDR4 3200 MHz</li>
-                    <li>AMD Radeon RX 6750 XT - 12Go</li>
-                    <li>GIGABYTE A520M S2H</li>
-                    <li>1To M.2 SSD</li>
-                </ul>
-            </div>
-            <p>Prix</p>
-            <button class="cart"><span><i class="bi bi-cart"></i></span> Ajouter au panier</button>
-        </div>
-    </div>
-
-    <div class="produits">
-        <img src="https://picsum.photos/300/300" alt="">
-        <div>
-            <p>PC Portable</p>
-            <div class="caracteristiques">
-                <ul>
-                    <li>AMD Ryzen 5 5600X 6x3.70GHz</li>
-                    <li>16Go DDR4 3200 MHz</li>
-                    <li>AMD Radeon RX 6750 XT - 12Go</li>
-                    <li>GIGABYTE A520M S2H</li>
-                    <li>1To M.2 SSD</li>
-                </ul>
-            </div>
-            <p>Prix</p>
-            <button class="cart"><span><i class="bi bi-cart"></i></span> Ajouter au panier</button>
-        </div>
-    </div>
+    <?php endforeach;
+    if (!$found) : ?>
+        <p>Produits non trouvés</p>
+    <?php endif; ?>
 </div>
 
 <?php
-include 'footer.php'
+include 'footer.php';
 ?>
