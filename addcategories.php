@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 include 'header.php';
 
@@ -26,17 +25,26 @@ if(empty($_POST['category_name']) || empty($_FILES['category_image']['name'])){
         $chemin_destination = $uploadDir . basename($_FILES['category_image']['name']);
         try{
             $data = move_uploaded_file($_FILES['category_image']['tmp_name'], $chemin_destination);
+            echo "<script>Swal.fire({
+                icon: 'success',
+                title: 'Création effectuée',
+                text: 'Catégorie ajoutée avec succès',
+            }).then(function() {
+                window.location.href = 'categories.php';
+            });</script>";
         }catch(Exception $e){
-            echo '<script type="text/javascript">alert("Erreur sur la copie du fichier : '.$e.'")</script>';
+            echo `<script type="text/javascript">Swal.fire({title: "Création catégorie" text: "Erreur : Copie du fichier `.$e.`", icon: 'error', confirmButtonText: 'OK'}).then(function () {window.location.href = '#';});</script>`;
         }
     }else{
-        echo "erreur fichier";
+        echo "<script>Swal.fire({
+            icon: 'error',
+            title: 'Création catégorie',
+            text: 'Erreur : Fichier vide',
+        }).then(function() {
+            window.location.href = '#';
+        });</script>";
     }
-
-    var_dump($_POST);
-    var_dump($_FILES);
 }
-
 ?>
 
 <body>
