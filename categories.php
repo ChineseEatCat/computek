@@ -1,34 +1,20 @@
 <?php
 include 'header.php';
+
+include 'config/bdd.php';
+$categories = $db->query('SELECT * FROM categorie');
+
 ?>
 
 <h1>Nos Produits</h1>
-
+<a href="addcategories.php">Ajouter une catégorie</a>
 <div class="categories">
-    <div class="container">
-        <img src="https://picsum.photos/64/64" alt="">
-        <a href="produits.php">Ordinateur Fixe & Portable</a>
-    </div>
-
-    <div class="container">
-        <img src="https://picsum.photos/64/64" alt="">
-        <a href="produits.php">Carte graphiques</a>
-    </div>
-
-    <div class="container">
-        <img src="https://picsum.photos/64/64" alt="">
-        <a href="produits.php">Processeurs</a>
-    </div>
-
-    <div class="container">
-        <img src="https://picsum.photos/64/64" alt="">
-        <a href="produits.php">Disque Dur</a>
-    </div>
-
-    <div class="container">
-        <img src="https://picsum.photos/64/64" alt="">
-        <a href="produits.php">Mémoires Vives</a>
-    </div>
+    <?php foreach ($categories as $category) : ?>
+        <div class="container">
+            <img src="<?= $category['IMAGE'] ?>" alt="">
+            <a href="produits.php?id=<?= $category['ID'] ?>"><?= $category['LIBELLE'] ?></a>
+        </div>
+    <?php endforeach; ?>
 </div>
 
 <?php
