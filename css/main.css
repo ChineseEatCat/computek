@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   min-height: 100%;
 }
 body {
@@ -50,7 +51,7 @@ body {
   background-color: #ffffff; /* Couleur de fond blanc */
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 300px;
+  max-width: 325px;
   width: 100%;
   border-radius: 8px;
 }
@@ -59,7 +60,7 @@ body {
   margin-top: 15px;
 }
 
-.produits p{
+.produits p {
   color: #575757;
   height: 44px;
   font-weight: 600;
@@ -76,13 +77,13 @@ body {
 .caracteristiques ul {
   padding-top: 10px;
   padding-inline-start: 0;
-  border-top: 1px solid #E9E9E9;
+  border-top: 1px solid #e9e9e9;
 }
 
 .caracteristiques ul li {
+  list-style: none;
   padding-bottom: 3px;
-  max-height: 24px;
-  overflow: hidden;
+  /* max-height: 24px; */
 }
 
 .caracteristiques ul li::before {

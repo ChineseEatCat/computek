@@ -36,7 +36,15 @@ foreach ($categories as $category) {
                     </ul>
                 </div>
                 <p><?= $produit['PRIX'] ?>€</p>
-                <button class="cart"><span><i class="bi bi-cart"></i></span> Ajouter au panier</button>
+                <form action="panier.php" method="post">
+                    <input type="hidden" name="id" value="<?= $produit['ID'] ?>">
+                    <input type="hidden" name="marque" value="<?= htmlspecialchars($produit['MARQUE']) ?>">
+                    <input type="hidden" name="model" value="<?= htmlspecialchars($produit['MODEL']) ?>">
+                    <input type="hidden" name="prix" value="<?= $produit['PRIX'] ?>">
+                    <input type="hidden" name="image" value="<?= $produit['IMAGE'] ?>">
+                    <button type="submit" class="cart"><span><i class="bi bi-cart"></i></span> Ajouter au panier</button>
+                </form>
+                <!--<button class="cart"><span><i class="bi bi-cart"></i></span> Ajouter au panier</button>-->
             </div>
         </div>
     <?php endforeach;

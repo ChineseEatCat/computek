@@ -1,3 +1,12 @@
+<?php
+session_start(); // Activer les sessions
+$totalQuantite = 0;
+
+// Calculer le nombre total d'articles dans le panier
+if (isset($_SESSION['panier'])) {
+	$totalQuantite = array_sum(array_column($_SESSION['panier'], 'quantite'));
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -20,7 +29,8 @@
 				<li><a href="index.php">Accueil</a></li>
 				<li><a href="categories.php">Produits</a></li>
 				<li><a href="apropos.php">A propos</a></li>
-				<li><a href="panier.php">Panier</a></li>
+				<li><a href="panier.php">Panier <span class="panier" id="cart-count"><?= isset($_SESSION['panier']) ? array_sum(array_column($_SESSION['panier'], 'quantite')) : 0 ?></span></a></li>
+				<!--<li><a href="panier.php">Panier</a></li>-->
 				<li><a href="connexion.php">Connexion</a></li>
 			</ul>
 		</nav>
