@@ -7,7 +7,7 @@ if (!isset($_SESSION['panier'])) {
 }
 
 // Vérifier si l'utilisateur a cliqué sur "Vider le panier"
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'vider') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['panier']) && $_POST['panier'] === 'vider') {
     // Vider le panier
     $_SESSION['panier'] = [];
     // Rediriger pour éviter de renvoyer le formulaire en cas de rafraîchissement
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['marque'
         </div>
         <button class="cart"><span><i class="bi bi-cart"></i></span> Valider mon panier</button>
         <form action="panier.php" method="post" style="margin-top: 20px;">
-            <input type="hidden" name="action" value="vider">
+            <input type="hidden" name="panier" value="vider">
             <button type="submit" class="cart" style="background-color: red; color: white;">
                 <span><i class="bi bi-trash"></i></span> Vider le panier
             </button>
