@@ -2,8 +2,6 @@
 include 'header.php';
 ?>
 
-<main>
-
 	<main>
 		<h1>Connexion</h1>
 		<div class="position-form">
