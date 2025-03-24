@@ -5,9 +5,12 @@ include 'header.php';
 include 'config/bdd.php';
 
 if (isset($_POST['email'])) {
-    $stmt = $db->query('SELECT * FROM utilisateurs WHERE EMAIL = "' . $_POST['email'] . '" AND PASSWORD = "' . $_POST['pass'] . '"');
+    $sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email AND PASSWORD = :pass';
+    $stmt = $db->prepare($sql);
+    $stmt->execute([':email' => $_POST['email'], ':pass' => $_POST['pass']]);
     $resultat = $stmt->fetch();
 }
+
 ?>
 
 <main>
@@ -17,6 +20,7 @@ if (isset($_POST['email'])) {
             <h4>CONNEXION</h4>
             <?php
             if (isset($_POST['email']) && $resultat == true) {
+                $_SESSION['user'] = ['utilisateur' => $_POST['email'], 'password' => $_POST['pass'], 'role' => ($resultat['ADMIN'] == 1 ? 'admin' : 'user')];
                 header('Location: user.php');
             } else {
                 echo "<p id='msg-error'>*E-mail ou mot de passe incorrect*</p>";

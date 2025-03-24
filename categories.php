@@ -7,8 +7,12 @@ $categories = $db->query('SELECT * FROM categorie');
 ?>
 
 <h1>Nos Produits</h1>
-<a href="addcategories.php">Ajouter une catégorie</a><br>
-<a href="addproduits.php">Ajouter un produit</a>
+<?php
+if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin') {
+    echo '<a href="addcategories.php">Ajouter une catégorie</a><br>';
+    echo '<a href="addproduits.php">Ajouter un produit</a>';
+}
+?>
 <div class="categories">
     <?php foreach ($categories as $category) : ?>
         <div class="container">
