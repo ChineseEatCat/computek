@@ -91,6 +91,22 @@ body {
 }
 
 /* Bouton Ajouter Panier */
+a.cart {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s, background-color 0.15s;
+}
+
+a.cart:hover {
+  background-color: #555;
+}
+
+/* Bouton Ajouter Panier */
 button.cart {
   background-color: #333;
   color: #fff;
