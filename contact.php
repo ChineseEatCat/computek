@@ -1,11 +1,13 @@
 <?php
-include 'header.php'
+include 'header.php';
 ?>
 
 <main>
 	<h1>Contact</h1>
 	<div class="position-form">
-		<form class="contact">
+
+
+		<form action="contact_action.php" method="post">
 			<h4>ENVOYER UN MESSAGE</h4>
 			<hr>
 			<div class="nom-prenom">
@@ -30,5 +32,6 @@ include 'header.php'
 </main>
 
 <?php
-include 'footer.php'
+
+include 'footer.php';
 ?>
