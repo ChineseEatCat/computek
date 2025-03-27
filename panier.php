@@ -116,12 +116,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['marque'
                 <p class="prix"><?= number_format($total * 0.2, 2, ',', ' ') ?> €</p>
             </div>
         </div>
-        <button class="cart"><span><i class="bi bi-cart"></i></span> Valider mon panier</button>
-        <form action="panier.php" method="post" style="margin-top: 20px;">
+        <a href="commande.php" class="cart"><span><i class="bi bi-cart"></i></span> Valider mon panier</a>
+        <form action="panier.php" method="post" style="margin: 25px 0;">
             <input type="hidden" name="panier" value="vider">
-            <button type="submit" class="cart" style="background-color: red; color: white;">
+            <a type="submit" class="cart" style="background-color: red; color: white;">
                 <span><i class="bi bi-trash"></i></span> Vider le panier
-            </button>
+            </a>
         </form>
     </div>
 </div>
