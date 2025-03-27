@@ -38,14 +38,14 @@ try {
     // Contenu de l'e-mail
     $mail->isHTML(true);
     $mail->Subject = $_POST['objet'];
-    $mail->Body    = 'Vous avez reçus un message: '.$_POST['message'];
-    $mail->AltBody = 'Vous avez reçus un message: '.$_POST['message'];
+    $mail->Body    = 'Vous avez reçus un message: ' . $_POST['message'];
+    $mail->AltBody = 'Vous avez reçus un message: ' . $_POST['message'];
 
     // Définir l'encodage UTF-8
     $mail->CharSet = 'UTF-8';
     $mail->send();
     echo 'L\'e-mail a été envoyé avec succès';
-    header('location :contact.php?msg=Envoyé avec succès');
+    header('location: contact.php?msg=Envoyé avec succès');
 } catch (Exception $e) {
     echo "L'e-mail n'a pas pu être envoyé. Erreur: {$mail->ErrorInfo}";
 }
