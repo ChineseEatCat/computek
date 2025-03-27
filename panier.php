@@ -119,9 +119,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['marque'
         <a href="commande.php" class="cart"><span><i class="bi bi-cart"></i></span> Valider mon panier</a>
         <form action="panier.php" method="post" style="margin: 25px 0;">
             <input type="hidden" name="panier" value="vider">
-            <a type="submit" class="cart" style="background-color: red; color: white;">
+            <button type="submit" class="cart" style="background-color: red; color: white;">
                 <span><i class="bi bi-trash"></i></span> Vider le panier
-            </a>
+            </button>
         </form>
     </div>
 </div>

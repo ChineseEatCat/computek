@@ -35,7 +35,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  border-bottom: 2px solid #949494; /* Bordure basse de 2 pixels de couleur grise */
+  color: #f0a500; /* Couleur dorée au survol */
 }
 
 h1 {
