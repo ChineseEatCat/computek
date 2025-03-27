@@ -25,21 +25,31 @@ if (isset($_SESSION['panier'])) {
 
 <body>
 	<header>
-		<nav>
-			<ul>
-				<li><a href="index.php">Accueil</a></li>
-				<li><a href="categories.php">Produits</a></li>
-				<li><a href="apropos.php">A propos</a></li>
-				<li><a href="panier.php">Panier <span class="panier" id="cart-count"><?= isset($_SESSION['panier']) ? array_sum(array_column($_SESSION['panier'], 'quantite')) : 0 ?></span></a></li>
-				<!--<li><a href="panier.php">Panier</a></li>-->
-				<li><?php
-				if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-					echo '<a href="user.php">Compte</a>';
-				} elseif ((isset($_SESSION['user']) && empty($_SESSION['user'])) || !isset($_SESSION['user'])) {
-					echo '<a href="connexion.php">Connexion</a>';
-				}
-				?>
-				</li>
-			</ul>
-		</nav>
+		<div class="nav">
+			<nav>
+				<ul>
+					<li><a href="index.php">Accueil</a></li>
+					<li><a href="categories.php">Produits</a></li>
+					<li><a href="apropos.php">A propos</a></li>
+					<li><a href="panier.php">Panier <span class="panier" id="cart-count"><?= isset($_SESSION['panier']) ? array_sum(array_column($_SESSION['panier'], 'quantite')) : 0 ?></span></a></li>
+					<li>
+						<?php
+						if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+							echo '<a href="user.php">Compte</a>';
+						} else {
+							echo '<a href="connexion.php">Connexion</a>';
+						}
+						?>
+					</li>
+				</ul>
+			</nav>
+			<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
+				<nav>
+					<ul>
+						<li><a href="addproduits.php">Ajouter un produit</a></li>
+						<li><a href="addcategories.php">Ajouter une catégorie</a></li>
+					</ul>
+				</nav>
+			<?php endif; ?>
+		</div>
 	</header>
