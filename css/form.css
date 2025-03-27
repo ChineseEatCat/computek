@@ -44,7 +44,7 @@ form h4 {
     font-size: 20px;
 }
 
-form hr {
+hr {
     margin: 10px 0;
     background-color: hsl(0, 0%, 37%);
     height: 1px;
@@ -70,7 +70,15 @@ label {
     margin-bottom: 6px;
 }
 
-input {
+.connexion, input {
+    margin-bottom: 5px;
+    margin-top: 10px;
+    padding: 5px;
+    outline: 0;
+    border-radius: 8px;
+}
+
+.inscription, input {
     margin-bottom: 5px;
     margin-top: 10px;
     padding: 5px;
@@ -88,10 +96,9 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #c2c2c2;
     color: #000000;
-    border-radius: 150px;
 }
 
-#msg-error {
+.msg-error {
     color: #e00000;
     padding: 5px;
     border: 1px solid #000000;
