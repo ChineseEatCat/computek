@@ -23,7 +23,7 @@ if (isset($_POST['email'])) {
                 $_SESSION['user'] = ['utilisateur' => $_POST['email'], 'password' => $_POST['pass'], 'role' => ($resultat['ADMIN'] == 1 ? 'admin' : 'user')];
                 header('Location: user.php');
             } else {
-                echo "<p id='msg-error'>*E-mail ou mot de passe incorrect*</p>";
+                echo "<p class='msg-error'>*E-mail ou mot de passe incorrect*</p>";
             }
             ?>
             <hr>

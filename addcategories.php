@@ -1,6 +1,8 @@
 <?php
 include 'header.php';
 
+include 'testadmin.php';
+
 //Vérification des champs
 if(empty($_POST['category_name']) || empty($_FILES['category_image']['name'])){
     echo '<p style="color: red">Veuillez remplir tous les champs</p>';
