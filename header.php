@@ -43,13 +43,17 @@ if (isset($_SESSION['panier'])) {
 					</li>
 				</ul>
 			</nav>
-			<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
+		</div>
+
+		<?php if (isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']['role'] == "admin") : ?>
+			<div class="nav admin">
 				<nav>
 					<ul>
 						<li><a href="addproduits.php">Ajouter un produit</a></li>
 						<li><a href="addcategories.php">Ajouter une catégorie</a></li>
 					</ul>
 				</nav>
-			<?php endif; ?>
-		</div>
+			</div>
+		<?php endif; ?>
+
 	</header>

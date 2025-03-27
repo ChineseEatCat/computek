@@ -103,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['marque'
             </div>
         </div>
         <div class="total">
+            <hr>
             <div>
                 <h2>Total</h2>
                 <p class="prix"><strong> <?= number_format($total + 24.9, 2, ',', ' ') ?> €</strong></p>

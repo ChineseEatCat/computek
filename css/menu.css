@@ -1,19 +1,18 @@
 /** Menu **/
-
-header {
+div.nav {
   background-color: #333; /* Couleur de fond */
   box-sizing: border-box; /* La boîte inclut les bordures et le padding */
   color: #fff; /* Couleur du texte */
   padding: 10px 0; /* Marge intérieure de 10 pixels en haut et en bas */
   text-align: center; /* Centrer le texte */
-  width: max-content; /* Largeur maximale */
-  margin: 0 auto; /* Centrer le bloc */
-  margin-top: 10px; /* Marge en haut */
+  width: fit-content; /* Largeur maximale */
+  margin: 10px; /* Marge en haut */
   border-radius: 8px; /* Bord arrondi */
 }
 
-header h1 {
-  margin: 0; /* Pas de marge */
+header {
+  display: flex; /* Affichage en ligne pour chaque nav */
+  justify-content: center;
 }
 
 nav ul {
@@ -49,4 +48,8 @@ span.panier {
   color: white; /* Couleur du texte blanc */
   border-radius: 8px; /* Bord arrondi */
   padding: 2px 10px; /* Marge intérieure */
+}
+
+div.admin a:hover{
+  color: #00c900; /* Couleur dorée au survol */
 }
