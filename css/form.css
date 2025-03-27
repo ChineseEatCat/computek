@@ -90,3 +90,16 @@ input[type=submit]:hover {
     color: #000000;
     border-radius: 150px;
 }
+
+#msg-error {
+    color: #e00000;
+    padding: 5px;
+    border: 1px solid #000000;
+    border-radius: 16px;
+    width: 90%;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 5px;
+    font-weight: bold;
+}

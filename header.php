@@ -18,6 +18,7 @@ if (isset($_SESSION['panier'])) {
 	<link rel="stylesheet" href="css/panier.css">
 	<link rel="stylesheet" href="css/footer.css">
 	<link rel="stylesheet" href="css/form.css">
+	<link rel="stylesheet" href="css/user.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -31,7 +32,14 @@ if (isset($_SESSION['panier'])) {
 				<li><a href="apropos.php">A propos</a></li>
 				<li><a href="panier.php">Panier <span class="panier" id="cart-count"><?= isset($_SESSION['panier']) ? array_sum(array_column($_SESSION['panier'], 'quantite')) : 0 ?></span></a></li>
 				<!--<li><a href="panier.php">Panier</a></li>-->
-				<li><a href="connexion.php">Connexion</a></li>
+				<li><?php
+				if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+					echo '<a href="user.php">Compte</a>';
+				} elseif ((isset($_SESSION['user']) && empty($_SESSION['user'])) || !isset($_SESSION['user'])) {
+					echo '<a href="connexion.php">Connexion</a>';
+				}
+				?>
+				</li>
 			</ul>
 		</nav>
 	</header>

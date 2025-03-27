@@ -3,6 +3,7 @@ include 'header.php';
 
 include 'config/bdd.php';
 
+include 'testadmin.php';
 
 if (!empty($_POST['MARQUE']) || !empty($_POST['MODEL']) || !empty($_POST['PRIX']) || !empty($_POST['IMAGE']) || !empty($_POST['CARACTERISTIQUES']) || !empty($_POST['ID_CATEGORIE'])) {
     // Faire un tableau pour les caractéristiques
@@ -81,7 +82,7 @@ if (!empty($_POST['MARQUE']) || !empty($_POST['MODEL']) || !empty($_POST['PRIX']
 
 ?>
 
-<h1>Produit ajouté</h1>
+<h1>Ajouter un Produit</h1>
 <div class="categories">
     <div class="container">
         <form action="" method="post" enctype="multipart/form-data">
