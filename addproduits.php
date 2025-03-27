@@ -81,7 +81,7 @@ if (!empty($_POST['MARQUE']) || !empty($_POST['MODEL']) || !empty($_POST['PRIX']
 
 ?>
 
-<h1>Produit ajouté</h1>
+<h1>Ajouter un Produit</h1>
 <div class="categories">
     <div class="container">
         <form action="" method="post" enctype="multipart/form-data">
