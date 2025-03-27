@@ -18,6 +18,7 @@ if (isset($_SESSION['panier'])) {
 	<link rel="stylesheet" href="css/panier.css">
 	<link rel="stylesheet" href="css/footer.css">
 	<link rel="stylesheet" href="css/form.css">
+	<link rel="stylesheet" href="css/user.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
