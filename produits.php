@@ -43,7 +43,11 @@ foreach ($categories as $category) {
                     <input type="hidden" name="image" value="<?= $produit['IMAGE'] ?>">
                     <button type="submit" class="cart"><span><i class="bi bi-cart"></i></span> Ajouter au panier</button>
                 </form>
-                <!--<button class="cart"><span><i class="bi bi-cart"></i></span> Ajouter au panier</button>-->
+                <?php if (isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']['role'] == "admin") : ?>
+                    <a href="editproduits?id=<?= $produit['ID'] ?>" class="modifier">Modifier</a>
+                    <a href="delproduits?id=<?= $produit['ID'] ?>" class="supprimer">Supprimer</a>
+                    <!--<button class="cart"><span><i class="bi bi-cart"></i></span> Ajouter au panier</button>-->
+                <?php endif; ?>
             </div>
         </div>
     <?php endforeach;

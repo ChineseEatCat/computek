@@ -120,3 +120,36 @@ button.cart {
 button.cart:hover {
   background-color: #555;
 }
+
+/* Bouton Modifier/Supprimer */
+a.modifier {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: orange;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+a.modifier:hover {
+  background-color: darkorange;
+}
+
+a.supprimer {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: red;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+a.supprimer:hover {
+  background-color: darkred;
+}
