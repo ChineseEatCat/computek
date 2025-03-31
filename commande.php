@@ -1,6 +1,5 @@
 <?php
 include 'header.php';
-include 'config/bdd.php';
 
 //Si le panier est vide alors le marquer en erreur
 if (empty($_SESSION['panier'])) {

@@ -1,6 +1,5 @@
 <?php
 include 'header.php';
-require 'config/bdd.php';
 
 $sorties = $db->prepare('SELECT * FROM produits ORDER BY ID DESC LIMIT 3');
 $sorties->execute();

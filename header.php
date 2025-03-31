@@ -2,6 +2,15 @@
 session_start(); // Activer les sessions
 $totalQuantite = 0;
 
+include 'config/bdd.php';
+
+// Vérifier si l'utilisateur est connecté
+if($_SESSION['user']['role'] != "admin"){
+	$stmt = $db->prepare('SELECT * FROM utilisateurs WHERE EMAIL = ?');
+	$stmt->execute([$_SESSION['user']['utilisateur']]);
+	$user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 // Calculer le nombre total d'articles dans le panier
 if (isset($_SESSION['panier'])) {
 	$totalQuantite = array_sum(array_column($_SESSION['panier'], 'quantite'));

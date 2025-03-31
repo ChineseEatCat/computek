@@ -2,8 +2,6 @@
 
 include 'header.php';
 
-include 'config/bdd.php';
-
 var_dump($_POST);
 
 if (isset($_POST['email'])) {

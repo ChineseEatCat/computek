@@ -1,7 +1,6 @@
 <?php
 include 'header.php';
 
-include 'config/bdd.php';
 $categories = $db->query('SELECT * FROM categorie WHERE ID =' . $_GET['id']);
 $produits = $db->query('SELECT * FROM produits WHERE ID_CATEGORIE =' . $_GET['id']);
 

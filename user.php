@@ -4,8 +4,6 @@ include 'header.php';
 
 include 'testuser.php';
 
-include 'config/bdd.php';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deconnexion']) && $_POST['deconnexion'] === 'disconnect') {
     // Se deconnecter
     $_SESSION['user'] = [];

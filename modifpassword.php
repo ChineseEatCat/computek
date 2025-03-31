@@ -4,8 +4,6 @@ include 'header.php';
 
 include 'testuser.php';
 
-include 'config/bdd.php';
-
 $sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email AND PASSWORD = :password';
 $stmt = $db->prepare($sql);
 $stmt->execute([':email' => $_SESSION['user']['utilisateur'], ':password' => $_SESSION['user']['password']]);

@@ -2,8 +2,6 @@
 
 include 'header.php';
 
-include 'config/bdd.php';
-
 if (isset($_POST['email'])) {
     $sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email AND PASSWORD = :pass';
     $stmt = $db->prepare($sql);

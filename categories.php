@@ -1,7 +1,6 @@
 <?php
 include 'header.php';
 
-include 'config/bdd.php';
 $categories = $db->query('SELECT * FROM categorie');
 
 ?>
