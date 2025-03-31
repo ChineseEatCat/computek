@@ -45,7 +45,7 @@ $resultat = $stmt->fetch();
             </form>
         </div>
         <div class="button-user">
-            <form action="connexion.php" method="post">
+            <form action="user.php" method="post">
                 <input type="hidden" name="deconnexion" value="disconnect">
                 <button type="submit" class="disconnect">Déconnexion</button>
             </form>
