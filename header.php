@@ -4,7 +4,7 @@ $totalQuantite = 0;
 
 include 'config/bdd.php';
 
-if(isset($_SESSION['user'])){
+if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
 	$stmt = $db->prepare('SELECT * FROM utilisateurs WHERE EMAIL = ?');
 	$stmt->execute([$_SESSION['user']['utilisateur']]);
 	$user = $stmt->fetch();
