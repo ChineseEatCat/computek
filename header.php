@@ -4,11 +4,19 @@ $totalQuantite = 0;
 
 include 'config/bdd.php';
 
-// Vérifier si l'utilisateur est connecté
-if($_SESSION['user']['role'] != "admin"){
+if(isset($_SESSION['user'])){
 	$stmt = $db->prepare('SELECT * FROM utilisateurs WHERE EMAIL = ?');
 	$stmt->execute([$_SESSION['user']['utilisateur']]);
-	$user = $stmt->fetch(PDO::FETCH_ASSOC);
+	$user = $stmt->fetch();
+
+	if($_SESSION['user']['role'] != $user['ADMIN']){
+		// Vérifier si l'utilisateur est un admin
+		if ($user['ADMIN'] == 1) {
+			$_SESSION['user']['role'] = "admin";
+		} else {
+			$_SESSION['user']['role'] = "user";
+		}
+	}
 }
 
 // Calculer le nombre total d'articles dans le panier
