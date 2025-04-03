@@ -4,12 +4,20 @@ include 'header.php';
 
 include 'testuser.php';
 
-include 'config/bdd.php';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deconnexion']) && $_POST['deconnexion'] === 'disconnect') {
     // Se deconnecter
     $_SESSION['user'] = [];
 
+    header('Location: connexion.php');
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['suppruser']) && $_POST['suppruser'] === 'supprimer') {
+    $sql = 'DELETE FROM utilisateurs WHERE EMAIL = :email';
+    $stmt = $db->prepare($sql);
+    $stmt->execute([':email' => $_SESSION['user']['utilisateur']]);
+
+    $_SESSION['user'] = [];
+    
     header('Location: connexion.php');
 }
 
@@ -47,11 +55,11 @@ $resultat = $stmt->fetch();
             </form>
         </div>
         <div class="button-user">
-            <form action="connexion.php" method="post">
+            <form action="user.php" method="post">
                 <input type="hidden" name="deconnexion" value="disconnect">
                 <button type="submit" class="disconnect">Déconnexion</button>
             </form>
-            <form action="suppruser.php" method="post">
+            <form action="user.php" method="post">
                 <input type="hidden" name="suppruser" value="supprimer">
                 <button type="submit" class="suppr-user">Supprimer le compte</button>
             </form>

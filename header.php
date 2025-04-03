@@ -2,6 +2,23 @@
 session_start(); // Activer les sessions
 $totalQuantite = 0;
 
+include 'config/bdd.php';
+
+if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+	$stmt = $db->prepare('SELECT * FROM utilisateurs WHERE EMAIL = ?');
+	$stmt->execute([$_SESSION['user']['utilisateur']]);
+	$user = $stmt->fetch();
+
+	if($_SESSION['user']['role'] != $user['ADMIN']){
+		// Vérifier si l'utilisateur est un admin
+		if ($user['ADMIN'] == 1) {
+			$_SESSION['user']['role'] = "admin";
+		} else {
+			$_SESSION['user']['role'] = "user";
+		}
+	}
+}
+
 // Calculer le nombre total d'articles dans le panier
 if (isset($_SESSION['panier'])) {
 	$totalQuantite = array_sum(array_column($_SESSION['panier'], 'quantite'));
@@ -19,6 +36,7 @@ if (isset($_SESSION['panier'])) {
 	<link rel="stylesheet" href="css/footer.css">
 	<link rel="stylesheet" href="css/form.css">
 	<link rel="stylesheet" href="css/user.css">
+	<link rel="shortcut icon" href="logo.png" type="image/x-icon">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -43,13 +61,18 @@ if (isset($_SESSION['panier'])) {
 					</li>
 				</ul>
 			</nav>
-			<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
+		</div>
+
+		<?php if (isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']['role'] == "admin") : ?>
+			<div class="nav admin">
 				<nav>
 					<ul>
 						<li><a href="addproduits.php">Ajouter un produit</a></li>
 						<li><a href="addcategories.php">Ajouter une catégorie</a></li>
+						<li><a href="gestionutilisateur.php">Gestion des utilisateurs</a></li>
 					</ul>
 				</nav>
-			<?php endif; ?>
-		</div>
+			</div>
+		<?php endif; ?>
+
 	</header>
