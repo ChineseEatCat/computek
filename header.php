@@ -4,7 +4,7 @@ $totalQuantite = 0;
 
 include 'config/bdd.php';
 
-if(isset($_SESSION['user'])){
+if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
 	$stmt = $db->prepare('SELECT * FROM utilisateurs WHERE EMAIL = ?');
 	$stmt->execute([$_SESSION['user']['utilisateur']]);
 	$user = $stmt->fetch();
@@ -36,6 +36,7 @@ if (isset($_SESSION['panier'])) {
 	<link rel="stylesheet" href="css/footer.css">
 	<link rel="stylesheet" href="css/form.css">
 	<link rel="stylesheet" href="css/user.css">
+	<link rel="stylesheet" href="css/panel.css">
 	<link rel="shortcut icon" href="logo.png" type="image/x-icon">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -69,6 +70,7 @@ if (isset($_SESSION['panier'])) {
 					<ul>
 						<li><a href="addproduits.php">Ajouter un produit</a></li>
 						<li><a href="addcategories.php">Ajouter une catégorie</a></li>
+						<li><a href="gestionutilisateur.php">Gestion des utilisateurs</a></li>
 					</ul>
 				</nav>
 			</div>
