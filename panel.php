@@ -7,17 +7,50 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
     exit;
 }
 
+// Récupérer la recherche
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+
+// Récupérer les catégories
+if (!empty($search)) {
+    $categories = $db->prepare('SELECT * FROM categorie WHERE LIBELLE LIKE :search');
+    $categories->execute([':search' => '%' . $search . '%']);
+    $totalCategories = $db->prepare('SELECT COUNT(*) FROM categorie WHERE LIBELLE LIKE :search');
+    $totalCategories->execute([':search' => '%' . $search . '%']);
+    $totalCategories = $totalCategories->fetchColumn();
+} else {
+    $categories = $db->query('SELECT * FROM categorie')->fetchAll();
+    $totalCategories = $db->query('SELECT COUNT(*) FROM categorie')->fetchColumn();
+}
+
 // Récupérer les produits
-$produits = $db->query('SELECT * FROM produits')->fetchAll();
+if (!empty($search)) {
+    $produits = $db->prepare('SELECT * FROM produits WHERE MARQUE LIKE :search OR MODEL LIKE :search');
+    $produits->execute([':search' => '%' . $search . '%']);
+    $totalProduits = $db->prepare('SELECT COUNT(*) FROM produits WHERE MARQUE LIKE :search OR MODEL LIKE :search');
+    $totalProduits->execute([':search' => '%' . $search . '%']);
+    $totalProduits = $totalProduits->fetchColumn();
+} else {
+    $produits = $db->query('SELECT * FROM produits')->fetchAll();
+    $totalProduits = $db->query('SELECT COUNT(*) FROM produits')->fetchColumn();
+}
 
 // Récupérer les utilisateurs
-$utilisateurs = $db->query('SELECT * FROM utilisateurs')->fetchAll();
+if (!empty($search)) {
+    $utilisateurs = $db->prepare('SELECT * FROM utilisateurs WHERE NOM LIKE :search OR PRENOM LIKE :search OR EMAIL LIKE :search');
+    $utilisateurs->execute([':search' => '%' . $search . '%']);
+    $totalUtilisateurs = $db->prepare('SELECT COUNT(*) FROM utilisateurs WHERE NOM LIKE :search OR PRENOM LIKE :search OR EMAIL LIKE :search');
+    $totalUtilisateurs->execute([':search' => '%' . $search . '%']);
+    $totalUtilisateurs = $totalUtilisateurs->fetchColumn();
+} else {
+    $utilisateurs = $db->query('SELECT * FROM utilisateurs')->fetchAll();
+    $totalUtilisateurs = $db->query('SELECT COUNT(*) FROM utilisateurs')->fetchColumn();
+}
 ?>
 
 <h1>Panneau d'administration</h1>
 
 <div class="admin-panel">
-    <form method="get" action="panel.php">
+    <form method="get" action="panel.php" class="search-form">
         <input type="text" name="search" placeholder="Rechercher un produit ou un utilisateur">
         <button type="submit">Rechercher</button>
     </form>
@@ -25,8 +58,9 @@ $utilisateurs = $db->query('SELECT * FROM utilisateurs')->fetchAll();
     <!-- Section Statistiques -->
     <h2>Statistiques</h2>
     <div class="stats">
-        <p>Nombre total de produits : <?= $db->query('SELECT COUNT(*) FROM produits')->fetchColumn() ?></p>
-        <p>Nombre total d'utilisateurs : <?= $db->query('SELECT COUNT(*) FROM utilisateurs')->fetchColumn() ?></p>
+        <p>Nombre total de catégories : <?= $totalCategories ?></p>
+        <p>Nombre total de produits : <?= $totalProduits ?></p>
+        <p>Nombre total d'utilisateurs : <?= $totalUtilisateurs ?></p>
     </div>
 
     <!-- Section Catégories -->
@@ -42,7 +76,6 @@ $utilisateurs = $db->query('SELECT * FROM utilisateurs')->fetchAll();
         </thead>
         <tbody>
             <?php
-            $categories = $db->query('SELECT * FROM categorie')->fetchAll();
             foreach ($categories as $categorie) : ?>
                 <tr>
                     <td><?= $categorie['ID'] ?></td>
@@ -58,6 +91,7 @@ $utilisateurs = $db->query('SELECT * FROM utilisateurs')->fetchAll();
 
     <!-- Section Produits -->
     <h2>Gestion des Produits</h2>
+    <a href="addproduits.php" class="ajouter"><i class="bi bi-plus-circle"></i> Ajouter un produit</a>
     <table class="admin-table">
         <thead>
             <tr>
@@ -86,6 +120,7 @@ $utilisateurs = $db->query('SELECT * FROM utilisateurs')->fetchAll();
 
     <!-- Section Utilisateurs -->
     <h2>Gestion des Utilisateurs</h2>
+    <a href="sub.php" class="ajouter"><i class="bi bi-plus-circle"></i> Ajouter un utilisateur</a>
     <table class="admin-table">
         <thead>
             <tr>
