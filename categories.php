@@ -4,7 +4,6 @@ include 'header.php';
 $sql = 'SELECT * FROM categorie';
 $stmt = $dn->prepare($sql);
 $stmt->execute();
-//Faire requête préparée
 
 ?>
 

@@ -1,9 +1,14 @@
 <?php
 include 'header.php';
 
-$categories = $db->query('SELECT * FROM categorie WHERE ID =' . $_GET['id']);
-$produits = $db->query('SELECT * FROM produits WHERE ID_CATEGORIE =' . $_GET['id']);
-//Faire des requêtes préparées
+$sql_categorie = 'SELECT * FROM categoerie WHERE ID=:ID';
+$stmt = $db->prepare($sql_categorie);
+$stmt->execute([':id' => $_GET['id']]);
+
+
+$sql_produit = 'SELECT * FROM produits WHERE ID_CATEGORIE=:ID';
+$stmt = $db->prepare($sql_produit);
+$stmt->execute([':id' => $_GET['id']]);
 
 foreach ($categories as $category) {
     if ($category['ID'] == $_GET['id']) {
