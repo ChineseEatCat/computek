@@ -1,8 +1,6 @@
 <?php
 include 'header.php';
 
-include 'config/bdd.php';
-
 include 'testadmin.php';
 
 if (!empty($_POST['MARQUE']) || !empty($_POST['MODEL']) || !empty($_POST['PRIX']) || !empty($_POST['IMAGE']) || !empty($_POST['CARACTERISTIQUES']) || !empty($_POST['ID_CATEGORIE'])) {
