@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deconnexion']) && $_P
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['suppruser']) && $_POST['suppruser'] === 'supprimer') {
     $sql = 'DELETE FROM utilisateurs WHERE EMAIL = :email';
     $stmt = $db->prepare($sql);
-    $stmt->execute([':email' => $_SESSION['user']['utilisateur']]);
+    $stmt->execute([':email' => $_SESSION['user']['email']]);
 
     $_SESSION['user'] = [];
     
@@ -37,13 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['suppruser']) && $_POS
 
 $sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email AND PASSWORD = :password';
 $stmt = $db->prepare($sql);
-$stmt->execute([':email' => $_SESSION['user']['utilisateur'], ':password' => $_SESSION['user']['password']]);
+$stmt->execute([':email' => $_SESSION['user']['email'], ':password' => $_SESSION['user']['password']]);
 $resultat = $stmt->fetch();
 
 ?>
 
 <main>
-    <h1>Utilisateur</h1>
+    <h1>Bonjour <?= $_SESSION['user']['utilisateur']?></h1>
     <div class="user-box">
         <h4>INFORMATION</h4>
         <hr>

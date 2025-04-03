@@ -21,7 +21,7 @@ if ($_POST['pass'] == $_POST['repass'] && $resultat == false) {
     $sql = 'INSERT INTO utilisateurs (NOM, PRENOM, EMAIL, PASSWORD) VALUES (:nom, :prenom, :email, :pass)';
     $stmt = $db->prepare($sql);
     $stmt->execute([':nom' => $_POST['nom'], ':prenom' => $_POST['prenom'], ':email' => $_POST['email'], ':pass' => $_POST['pass']]);
-    $_SESSION['user'] = ['utilisateur' => $_POST['email'], 'password' => $_POST['pass'], 'role' => ($resultat['ADMIN'] == 1 ? 'admin' : 'user')];
+    $_SESSION['user'] = ['utilisateur' => $_POST['prenom'], 'email' => $_POST['email'], 'password' => $_POST['pass'], 'role' => ($resultat['ADMIN'] == 1 ? 'admin' : 'user')];
     header('Location: user.php');
 }
 

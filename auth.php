@@ -18,7 +18,7 @@ if (isset($_POST['email'])) {
             <h4>CONNEXION</h4>
             <?php
             if (isset($_POST['email']) && $resultat == true) {
-                $_SESSION['user'] = ['utilisateur' => $_POST['email'], 'password' => $_POST['pass'], 'role' => ($resultat['ADMIN'] == 1 ? 'admin' : 'user')];
+                $_SESSION['user'] = ['utilisateur' => $resultat['PRENOM'], 'email' => $_POST['email'], 'password' => $_POST['pass'], 'role' => ($resultat['ADMIN'] == 1 ? 'admin' : 'user')];
                 header('Location: user.php');
             } else {
                 echo "<p class='msg-error'>*E-mail ou mot de passe incorrect*</p>";

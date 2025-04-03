@@ -6,7 +6,7 @@ include 'config/bdd.php';
 
 if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
 	$stmt = $db->prepare('SELECT * FROM utilisateurs WHERE EMAIL = ?');
-	$stmt->execute([$_SESSION['user']['utilisateur']]);
+	$stmt->execute([$_SESSION['user']['email']]);
 	$user = $stmt->fetch();
 
 	if($_SESSION['user']['role'] != $user['ADMIN']){
@@ -53,10 +53,7 @@ if (isset($_SESSION['panier'])) {
 					<li><a href="panier.php">Panier <span class="panier" id="cart-count"><?= isset($_SESSION['panier']) ? array_sum(array_column($_SESSION['panier'], 'quantite')) : 0 ?></span></a></li>
 					<li class="dropdown">
 					<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
-						<?php $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE EMAIL = ?'); ?>
-						<?php $stmt->execute([$_SESSION['user']['utilisateur']]); ?>
-						<?php $user = $stmt->fetch(); ?>
-						<a href="user.php" class="dropbtn"><?= $user['PRENOM']?></a>
+						<a href="user.php" class="dropbtn"><?= $_SESSION['user']['utilisateur']?></a>
 						<div class="dropdown-content">
 							<a href="user.php">Mon Profil</a>
 							<?php if ($_SESSION['user']['role'] == "admin") : ?>

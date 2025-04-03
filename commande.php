@@ -86,6 +86,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         padding-left: 5px;
         color: #009000;
     }
+
+    hr {
+        width: auto;
+    }
 </style>
 
 <h1>Commande</h1>
