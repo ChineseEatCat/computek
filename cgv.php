@@ -9,7 +9,7 @@ include 'header.php';
 
 	<article>
 		<h1> Conditions générales de vente </h1>
-		<h3>Qu'est-ce que le Lorem Ipsum?</h3>
+		<h3>Computek s'engage à vous fournir le meilleur</h3>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
 		<p>Quae contraria sunt his, malane?</p>
 		 
