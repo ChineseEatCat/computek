@@ -76,7 +76,6 @@ if (isset($_SESSION['panier'])) {
 					<ul>
 						<li><a href="addproduits.php">Ajouter un produit</a></li>
 						<li><a href="addcategories.php">Ajouter une catégorie</a></li>
-						<li><a href="gestionutilisateur.php">Gestion des utilisateurs</a></li>
 					</ul>
 				</nav>
 			</div>
