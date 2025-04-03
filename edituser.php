@@ -21,8 +21,6 @@ if (!empty($_GET['id'])) {
     $stmt = $db->prepare($sql);
     $stmt->execute([':id' => $_GET['id']]);
     $infoUser = $stmt->fetch();
-
-    var_dump($infoUser);
     ?>
 
     <form class="edituser" method="post" action="#">
