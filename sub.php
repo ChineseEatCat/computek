@@ -17,7 +17,7 @@ if ($_POST['pass'] == $_POST['repass']) {
     echo 'non';
 }
 
-if ($_POST['pass'] == $_POST['repass'] && $resultat == false) {
+if (isset($_POST) && !empty($_POST) && $_POST['pass'] == $_POST['repass'] && $resultat == false) {
     $sql = 'INSERT INTO utilisateurs (NOM, PRENOM, EMAIL, PASSWORD) VALUES (:nom, :prenom, :email, :pass)';
     $stmt = $db->prepare($sql);
     $stmt->execute([':nom' => $_POST['nom'], ':prenom' => $_POST['prenom'], ':email' => $_POST['email'], ':pass' => $_POST['pass']]);
