@@ -51,7 +51,7 @@ if (!empty($search)) {
 
 <div class="admin-panel">
     <form method="get" action="panel.php" class="search-form">
-        <input type="text" name="search" placeholder="Rechercher un produit ou un utilisateur">
+        <input type="text" name="search" placeholder="Rechercher une catégorie, un produit ou un utilisateur">
         <button type="submit">Rechercher</button>
     </form>
 
