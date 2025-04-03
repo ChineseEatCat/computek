@@ -105,7 +105,7 @@ if (!empty($_POST['MARQUE']) || !empty($_POST['MODEL']) || !empty($_POST['PRIX']
                                                                                                 } ?>"><br>
 
             <label for="IMAGE">Image du produit :</label><br>
-            <input type="file" id="IMAGE" name="IMAGE" accept="image/*" placeholder="Image du produit"><br>
+            <input type="file" id="IMAGE" name="IMAGE" accept="image/*" placeholder="Image du produit" required><br>
 
             <label for="CARACTERISTIQUES">Caractéristiques du produit :</label><br>
             <textarea style="min-height: 20vh; min-width: 30vh" type="text" name="CARACTERISTIQUES" placeholder="Caractéristiques: données, 

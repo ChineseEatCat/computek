@@ -9,7 +9,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deconnexion']) && $_P
     $_SESSION['user'] = [];
 
     header('Location: connexion.php');
+}else if (isset($_GET['deconnexion']) && $_GET['deconnexion'] === 'disconnect') {
+    // Détruire la session
+    session_start();
+    session_destroy();
+
+    // Rediriger sur la page précédente avec php
+    $previousPage = $_SERVER['HTTP_REFERER'];
+    if (isset($previousPage)) {
+        header('Location: ' . $previousPage);
+    } else {
+        header('Location: index.php');
+    }
+    exit;
 }
+
 
 $sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email AND PASSWORD = :password';
 $stmt = $db->prepare($sql);

@@ -27,13 +27,13 @@ nav ul li {
   margin: 0 15px; /* Marge à droite et à gauche de 15 pixels */
 }
 
-nav ul li a {
+nav ul li a{
   color: #fff; /* Couleur du texte */
   text-decoration: none; /* Pas de soulignement */
   font-weight: bold; /* Texte en gras */
 }
 
-nav ul li a:hover {
+nav ul li a:hover{
   color: #f0a500; /* Couleur dorée au survol */
 }
 
@@ -52,4 +52,54 @@ span.panier {
 
 div.admin a:hover{
   color: #00c900; /* Couleur dorée au survol */
+}
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown button */
+.dropbtn {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+/* Dropdown button hover effect */
+.dropbtn:hover {
+  color: #f0a500;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 150px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 5px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: #fff;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+}
+
+/* Links hover effect */
+.dropdown-content a:hover {
+  background-color: #444;
+  color: #f0a500;
+}
+
+/* Show the dropdown content on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
 }

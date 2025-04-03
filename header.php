@@ -51,14 +51,20 @@ if (isset($_SESSION['panier'])) {
 					<li><a href="categories.php">Produits</a></li>
 					<li><a href="apropos.php">A propos</a></li>
 					<li><a href="panier.php">Panier <span class="panier" id="cart-count"><?= isset($_SESSION['panier']) ? array_sum(array_column($_SESSION['panier'], 'quantite')) : 0 ?></span></a></li>
-					<li>
-						<?php
-						if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-							echo '<a href="user.php">Compte</a>';
-						} else {
-							echo '<a href="connexion.php">Connexion</a>';
-						}
-						?>
+					<li class="dropdown">
+					<?php if (isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']['role'] == "admin"): ?>
+						<?php $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE EMAIL = ?'); ?>
+						<?php $stmt->execute([$_SESSION['user']['utilisateur']]); ?>
+						<?php $user = $stmt->fetch(); ?>
+						<a href="user.php" class="dropbtn"><?= $user['PRENOM']?></a>
+						<div class="dropdown-content">
+							<a href="user.php">Mon Profil</a>
+							<a href="panel.php">Panel d'administration</a>
+							<a href="user.php?deconnexion=disconnect">Déconnexion</a>
+						</div>
+					<?php else : ?>
+						<a href="connexion.php">Connexion</a>
+					<?php endif; ?>
 					</li>
 				</ul>
 			</nav>
