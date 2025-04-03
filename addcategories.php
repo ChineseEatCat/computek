@@ -4,9 +4,7 @@ include 'header.php';
 include 'testadmin.php';
 
 //Vérification des champs
-if(empty($_POST['category_name']) || empty($_FILES['category_image']['name'])){
-    echo '<p style="color: red">Veuillez remplir tous les champs</p>';
-}else{
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['category_name']) && isset($_FILES['category_image'])) {
 
     //Connexion à la base de données
     $db = new PDO('mysql:host=localhost;dbname=computek', 'root', '');
@@ -25,7 +23,7 @@ if(empty($_POST['category_name']) || empty($_FILES['category_image']['name'])){
         }
 
         $chemin_destination = $uploadDir . basename($_FILES['category_image']['name']);
-        try{
+        try {
             $data = move_uploaded_file($_FILES['category_image']['tmp_name'], $chemin_destination);
             echo "<script>Swal.fire({
                 icon: 'success',
@@ -34,10 +32,10 @@ if(empty($_POST['category_name']) || empty($_FILES['category_image']['name'])){
             }).then(function() {
                 window.location.href = 'categories.php';
             });</script>";
-        }catch(Exception $e){
-            echo `<script type="text/javascript">Swal.fire({title: "Création catégorie" text: "Erreur : Copie du fichier `.$e.`", icon: 'error', confirmButtonText: 'OK'}).then(function () {window.location.href = '#';});</script>`;
+        } catch (Exception $e) {
+            echo `<script type="text/javascript">Swal.fire({title: "Création catégorie" text: "Erreur : Copie du fichier ` . $e . `", icon: 'error', confirmButtonText: 'OK'}).then(function () {window.location.href = '#';});</script>`;
         }
-    }else{
+    } else {
         echo "<script>Swal.fire({
             icon: 'error',
             title: 'Création catégorie',
@@ -49,21 +47,49 @@ if(empty($_POST['category_name']) || empty($_FILES['category_image']['name'])){
 }
 ?>
 
-<body>
-    <h1>Ajouter Catégorie</h1>
-    <form action="addcategories.php" method="post" enctype="multipart/form-data">
-        <div>
-            <label for="category_name">Nom de la catégorie :</label>
-            <input type="text" id="category_name" name="category_name" required>
-        </div>
-        <div>
-            <label for="category_image">Image de la catégorie :</label>
-            <input type="file" id="category_image" name="category_image" accept="image/*" required>
-        </div>
-        <div>
-            <button type="submit">Ajouter la catégorie</button>
-        </div>
-    </form>
-</body>
+<style>
+    /* Bouton */
+    button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-</html>
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<h1>Ajouter Catégorie</h1>
+<div class="categories">
+    <div class="container">
+        <form action="addcategories.php" method="post" enctype="multipart/form-data">
+            <?php
+            if (empty($_POST['MARQUE']) || empty($_POST['MODEL']) || empty($_POST['PRIX']) || empty($_POST['IMAGE']) || empty($_POST['CARACTERISTIQUES']) || empty($_POST['ID_CATEGORIE'])) {
+                echo '<p style="color: red">Veuillez remplir tous les champs</p>';
+            }
+            ?>
+            <div>
+                <label for="category_name">Nom de la catégorie :</label>
+                <input type="text" id="category_name" name="category_name" required>
+            </div>
+            <div>
+                <label for="category_image">Image de la catégorie :</label>
+                <input type="file" id="category_image" name="category_image" accept="image/*" required>
+            </div>
+            <div>
+                <button type="submit">Ajouter la catégorie</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<?php
+include 'footer.php';
+?>

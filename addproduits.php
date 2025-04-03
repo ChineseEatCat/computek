@@ -79,7 +79,24 @@ if (!empty($_POST['MARQUE']) || !empty($_POST['MODEL']) || !empty($_POST['PRIX']
 //$produits = $db->exec('INSERT INTO produits (MARQUE, MODEL, PRIX, IMAGE, CARACTERISTIQUES, ID_CATEGORIE) VALUES ("'.$_POST['MARQUER'].'", "'.$_POST['MODEL'].'", "'.$_POST['PRIX'].'", "'.$_POST['IMAGE'].'", "'.$_POST['CARACTERISTIQUES'].'", "'.$_POST['ID_CATEGORIE'].'")');
 
 ?>
+<style>
+    /* Bouton */
+    button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
 <h1>Ajouter un Produit</h1>
 <div class="categories">
     <div class="container">
@@ -102,7 +119,7 @@ if (!empty($_POST['MARQUE']) || !empty($_POST['MODEL']) || !empty($_POST['PRIX']
             <label for="PRIX">Prix du produit :</label><br>
             <input type="number" step="0.01" name="PRIX" placeholder="Prix du produit" value="<?php if (isset($_POST['PRIX'])) {
                                                                                                     echo $_POST['PRIX'];
-                                                                                                } ?>"><br>
+                                                                                                } ?>"> <span>€</span><br>
 
             <label for="IMAGE">Image du produit :</label><br>
             <input type="file" id="IMAGE" name="IMAGE" accept="image/*" placeholder="Image du produit" required><br>
@@ -122,9 +139,8 @@ produit: données" value="<?php if (isset($_POST['CARACTERISTIQUES'])) {
                 echo '<option value="' . $category['ID'] . '">' . $category['LIBELLE'] . '</option>';
             }
             ?>
-            <br>
-            <br>
-            <input style="width: max-content !important" type="submit" value="Ajouter le produit">
+            </select><br><br>
+            <button type="submit">Ajouter le produit</button>
         </form>
     </div>
 </div>
