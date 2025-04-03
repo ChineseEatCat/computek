@@ -1,7 +1,10 @@
 <?php
 include 'header.php';
 
-$categories = $db->query('SELECT * FROM categorie');
+$sql = 'SELECT * FROM categorie';
+$stmt = $dn->prepare($sql);
+$stmt->execute();
+//Faire requête préparée
 
 ?>
 

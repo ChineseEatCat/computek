@@ -25,6 +25,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deconnexion']) && $_P
 }
 
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['suppruser']) && $_POST['suppruser'] === 'supprimer') {
+    $sql = 'DELETE FROM utilisateurs WHERE EMAIL = :email';
+    $stmt = $db->prepare($sql);
+    $stmt->execute([':email' => $_SESSION['user']['utilisateur']]);
+
+    $_SESSION['user'] = [];
+    
+    header('Location: connexion.php');
+}
+
 $sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email AND PASSWORD = :password';
 $stmt = $db->prepare($sql);
 $stmt->execute([':email' => $_SESSION['user']['utilisateur'], ':password' => $_SESSION['user']['password']]);
@@ -63,7 +73,7 @@ $resultat = $stmt->fetch();
                 <input type="hidden" name="deconnexion" value="disconnect">
                 <button type="submit" class="disconnect">Déconnexion</button>
             </form>
-            <form action="suppruser.php" method="post">
+            <form action="user.php" method="post">
                 <input type="hidden" name="suppruser" value="supprimer">
                 <button type="submit" class="suppr-user">Supprimer le compte</button>
             </form>

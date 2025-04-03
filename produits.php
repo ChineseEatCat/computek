@@ -3,6 +3,7 @@ include 'header.php';
 
 $categories = $db->query('SELECT * FROM categorie WHERE ID =' . $_GET['id']);
 $produits = $db->query('SELECT * FROM produits WHERE ID_CATEGORIE =' . $_GET['id']);
+//Faire des requêtes préparées
 
 foreach ($categories as $category) {
     if ($category['ID'] == $_GET['id']) {
