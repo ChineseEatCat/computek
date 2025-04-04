@@ -174,8 +174,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2>Informations de paiement</h2>
         <p style="color: red"><?= isset($_GET['msg']) ? $_GET['msg'] : "" ?></p>
         <form action="#" method="post">
-            <label for="civilite">Civilité :</label>
-            <select name="civilite" id="">
+            <label for="sexe">Sexe :</label>
+            <select name="sexe" id="">
                 <option value="monsieur">Monsieur</option>
                 <option value="madame">Madame</option>
                 <option value="chose">Helicoptère de combat</option>
