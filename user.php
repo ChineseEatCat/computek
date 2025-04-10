@@ -74,7 +74,7 @@ if (!$user) {
             </form>
         </div>
         <div class="button-user">
-            <form action="user.php" method="post">
+            <form action="user.php?deconnexion=disconnect">
                 <input type="hidden" name="deconnexion" value="disconnect">
                 <button type="submit" class="disconnect">Déconnexion</button>
             </form>
