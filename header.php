@@ -4,19 +4,13 @@ $totalQuantite = 0;
 
 include 'config/bdd.php';
 
-if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-	$stmt = $db->prepare('SELECT * FROM utilisateurs WHERE EMAIL = ?');
-	$stmt->execute([$_SESSION['user']['email']]);
-	$user = $stmt->fetch();
+if (!empty($_SESSION['user'])) {
+    $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE EMAIL = ?');
+    $stmt->execute([$_SESSION['user']['email']]);
+    $user = $stmt->fetch();
 
-	if($_SESSION['user']['role'] != $user['ADMIN']){
-		// Vérifier si l'utilisateur est un admin
-		if ($user['ADMIN'] == 1) {
-			$_SESSION['user']['role'] = "admin";
-		} else {
-			$_SESSION['user']['role'] = "user";
-		}
-	}
+    // Met à jour le rôle en fonction de la valeur de ADMIN (1 pour admin, sinon user)
+    $_SESSION['user']['role'] = (isset($user['ADMIN']) && $user['ADMIN'] == 1) ? 'admin' : 'user';
 }
 
 // Calculer le nombre total d'articles dans le panier
@@ -52,18 +46,18 @@ if (isset($_SESSION['panier'])) {
 					<li><a href="apropos.php">A propos</a></li>
 					<li><a href="panier.php">Panier <span class="panier" id="cart-count"><?= isset($_SESSION['panier']) ? array_sum(array_column($_SESSION['panier'], 'quantite')) : 0 ?></span></a></li>
 					<li class="dropdown">
-					<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
-						<a href="user.php" class="dropbtn"><?= $_SESSION['user']['utilisateur']?></a>
-						<div class="dropdown-content">
-							<a href="user.php">Mon Profil</a>
-							<?php if ($_SESSION['user']['role'] == "admin") : ?>
-								<a href="panel.php">Panel d'administration</a>
-							<?php endif; ?>
-							<a href="user.php?deconnexion=disconnect">Déconnexion</a>
-						</div>
-					<?php else : ?>
-						<a href="connexion.php">Connexion</a>
-					<?php endif; ?>
+						<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
+							<a href="user.php" class="dropbtn"><?= htmlspecialchars($_SESSION['user']['utilisateur'] ?? 'Utilisateur'); ?></a>
+							<div class="dropdown-content">
+								<a href="user.php">Mon Profil</a>
+								<?php if (($_SESSION['user']['role'] ?? '') === "admin") : ?>
+									<a href="panel.php">Panel d'administration</a>
+								<?php endif; ?>
+								<a href="user.php?deconnexion=disconnect">Déconnexion</a>
+							</div>
+						<?php else : ?>
+							<a href="connexion.php">Connexion</a>
+						<?php endif; ?>
 					</li>
 				</ul>
 			</nav>
