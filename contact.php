@@ -9,8 +9,7 @@ include 'header.php';
 			echo "<p class='msg'>".$_GET['msg']."</p>";
 		}
 		?>
-	<div class="position-form">
-		<form action="contact_action.php" method="post">
+		<form action="contact_action.php" method="post" class="contact">
 			<h4>ENVOYER UN MESSAGE</h4>
 			<hr>
 			<div class="nom-prenom">
@@ -31,7 +30,6 @@ include 'header.php';
 			<textarea name="message"></textarea>
 			<input type="submit" value="Envoyer">
 		</form>
-	</div>
 </main>
 
 <?php
