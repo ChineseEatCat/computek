@@ -3,7 +3,7 @@
 include 'header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['email'], $_POST['pass'], $_POST['repass'], $_POST['nom'], $_POST['prenom'])) {
+    if (!empty($_POST['email']) && !empty($_POST['pass']) && !empty($_POST['repass']) && !empty($_POST['nom']) && !empty($_POST['prenom'])) {
         // Vérification si les mots de passe correspondent
         if ($_POST['pass'] !== $_POST['repass']) {
             echo "<script>
@@ -30,6 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </script>";
             } else {
                 // Insertion de l'utilisateur
+                $sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email';
+                $stmt = $db->prepare($sql);
+                $stmt->execute([':email' => $_POST['email']]);
+                $resultat = $stmt->fetch();
+
                 $sql = 'INSERT INTO utilisateurs (NOM, PRENOM, EMAIL, PASSWORD) VALUES (:nom, :prenom, :email, :pass)';
                 $stmt = $db->prepare($sql);
                 $password = password_hash($_POST['pass'], PASSWORD_BCRYPT);
@@ -61,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     } else {
+        // Message d'erreur si des champs sont vides
         echo "<script>
             Swal.fire({
                 icon: 'error',
@@ -89,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
         <label>E-mail :</label>
-        <input type="email" name="email" value="<?= (isset($_POST['email']) && $resultat == false ? $_POST['email'] : '') ?>">
+        <input type="email" name="email" value="<?= (isset($_POST['email']) && $_POST['email'] == $resultat['EMAIL'] ? "" : $_POST['email']) ?>">
         <label>Mot de passe :</label>
         <input type="password" name="pass">
         <label>Confirmation mot de passe :</label>

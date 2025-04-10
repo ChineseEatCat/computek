@@ -32,14 +32,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </script>";
             } else {
                 // Insertion de l'utilisateur
-                $sql = 'INSERT INTO utilisateurs (NOM, PRENOM, EMAIL, PASSWORD) VALUES (:nom, :prenom, :email, :pass)';
+                $sql = 'INSERT INTO utilisateurs (NOM, PRENOM, EMAIL, PASSWORD, ADMIN) VALUES (:nom, :prenom, :email, :pass, :role)';
                 $stmt = $db->prepare($sql);
                 $password = password_hash($_POST['pass'], PASSWORD_BCRYPT);
                 $stmt->execute([
                     ':nom' => $_POST['nom'],
                     ':prenom' => $_POST['prenom'],
                     ':email' => $_POST['email'],
-                    ':pass' => $password
+                    ':pass' => $password,
+                    ':role' => $_POST['role']
                 ]);
 
                 // Message de succès et redirection
@@ -89,8 +90,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="password" name="pass">
         <label>Confirmation mot de passe :</label>
         <input type="password" name="repass">
+        <label for="role">Rôle :</label>
+        <select name="role" class="choixRole">
+            <option value="1">Admin</option>
+            <option value="0">Utilisateur</option>
+        </select>
         <input type="submit" value="S'inscrire">
-
     </form>
 </div>
 
