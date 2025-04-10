@@ -141,8 +141,8 @@ if (!empty($search)) {
                     <td><?= htmlspecialchars($utilisateur['EMAIL']) ?></td>
                     <td><?= $utilisateur['ADMIN'] == 1 ? 'Administrateur' : 'Utilisateur' ?></td>
                     <td>
-                        <a href="edituser?id=<?= $utilisateur['ID'] ?>" class="modifier">Modifier</a>
-                        <a href="deluser?id=<?= $utilisateur['ID'] ?>" class="supprimer">Supprimer</a>
+                        <a href="edituser?id=<?= $utilisateur['ID'] ?>" class="modifier"><i class="bi bi-pencil"></i> Modifier</a>
+                        <a href="deluser?id=<?= $utilisateur['ID'] ?>" class="supprimer"><i class="bi bi-trash"></i> Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
