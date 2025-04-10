@@ -30,10 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </script>";
             } else {
                 // Insertion de l'utilisateur
-                $sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email';
-                $stmt = $db->prepare($sql);
-                $stmt->execute([':email' => $_POST['email']]);
-                $resultat = $stmt->fetch();
 
                 $sql = 'INSERT INTO utilisateurs (NOM, PRENOM, EMAIL, PASSWORD) VALUES (:nom, :prenom, :email, :pass)';
                 $stmt = $db->prepare($sql);
@@ -95,7 +91,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
         <label>E-mail :</label>
-        <input type="email" name="email" value="<?= (isset($_POST['email']) && $_POST['email'] == $resultat['EMAIL'] ? "" : $_POST['email']) ?>">
+        <input type="email" name="email" value="<?php 
+                                                $sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email';
+                                                $stmt = $db->prepare($sql);
+                                                $stmt->execute([':email' => $_POST['email']]);
+                                                $verif = $stmt->fetch();
+
+                                                if (isset($_POST['email']) && $verif == false) {
+                                                    echo $_POST['email'];
+                                                }
+
+                                                ?>">
         <label>Mot de passe :</label>
         <input type="password" name="pass">
         <label>Confirmation mot de passe :</label>
