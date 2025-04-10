@@ -20,7 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $db->prepare($sql);
         $stmt->execute([':email' => $_SESSION['user']['email'] ?? '']);
         session_destroy();
-        header('Location: connexion.php');
+        echo "<script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Compte supprimé',
+                text: 'Votre compte a été supprimé avec succès.'
+            }).then(() => {
+                window.location.href = 'connexion.php';
+            });</script>";
         exit;
     }
 }
