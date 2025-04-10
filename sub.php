@@ -100,7 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 if (isset($_POST['email']) && $verif == false) {
                                                     echo $_POST['email'];
                                                 }
-
                                                 ?>">
         <label>Mot de passe :</label>
         <input type="password" name="pass">
