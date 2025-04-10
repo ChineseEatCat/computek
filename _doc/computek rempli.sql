@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 27 mars 2025 à 10:43
+-- Généré le : jeu. 10 avr. 2025 à 07:36
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.18
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `produits` (
   `PRIX` decimal(10,2) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `I_FK_PRODUITS_CATEGORIE` (`ID_CATEGORIE`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `produits`
@@ -75,7 +75,8 @@ INSERT INTO `produits` (`ID`, `ID_CATEGORIE`, `MARQUE`, `MODEL`, `DESCRIPTION`, 
 (3, 5, 'MSI', 'B650 Gaming Plus Wifi', '{\"Socket\":\"AMD AM5\",\"Chipset\":\"AMD B650\",\"Format\":\"ATX\",\"Connectivité\":\"Wifi\",\"Format de mémoire\":\"4 X DIMM 288 pins\",\"Fréquences mémoires\":\"7200Mhz\",\"Type de mémoire\":\"DDR5\",\"USB\":\"8 ports\",\"Norme réseau\":\"2.5Gbps Gigabit Ethernet\"}', 'image/5/MSI B650 Gaming Plus Wifi.png', 199.99),
 (4, 1, 'BE QUIET!', 'PC GAMER HIGH END SILENCIEUX | AMD Ryzen 7 7800X3D 8x4.20GHz | 32Go DDR5 | RX 7900 XT 20Go | 1To M.2 SSD', '{\"Processeur\":\"AMD Ryzen 7 7800X3D (8x 4.20GHz)\",\"Mémoire vive\":\"32GB DDR5 RAM 5600 MHz ADATA\",\"Carte graphique\":\"AMD Radeon RX 7900 XT - 20GB\",\"Carte mère\":\"GIGABYTE B650 Eagle AX WIFI\",\"Disque dur\":\"1000 GB M.2 SSD Western Digital WD Blue SN500\"}', 'image/1/pc gamer.png', 2015.80),
 (5, 3, 'INTEL', 'Core i9 14900KF', '{\"Fabricant de CPU\":\"Intel\",\"Modèle du CPU\":\"Core i9 14900KF\",\"Vitesse du CPU\":\"5.8 GHz\",\"Socket du CPU\":\"Intel 1700\",\"Plateforme\":\"Windows 11\",\"TDP\":\"125 Watts\",\"Total L3 Cache\":\"36 MB\"}', 'image/3/INTEL Core i9 14900KF.png', 559.99),
-(6, 3, 'INTEL', 'Core i7 14700KF', '{\"Fabricant de CPU\":\"Intel\",\"Modèle du CPU\":\"Core i7 14700KF\",\"Vitesse du CPU\":\"5.6 GHz\",\"Socket du CPU\":\"Intel 1700\",\"Plateforme\":\"Windows 11\",\"TDP\":\"125 Watts\",\"Total L3 Cache\":\"36 MB\"}', 'image/3/INTEL Core i7 14700KF.png', 384.00);
+(6, 3, 'INTEL', 'Core i7 14700KF', '{\"Fabricant de CPU\":\"Intel\",\"Modèle du CPU\":\"Core i7 14700KF\",\"Vitesse du CPU\":\"5.6 GHz\",\"Socket du CPU\":\"Intel 1700\",\"Plateforme\":\"Windows 11\",\"TDP\":\"125 Watts\",\"Total L3 Cache\":\"36 MB\"}', 'image/3/INTEL Core i7 14700KF.png', 384.00),
+(7, 1, 'PC GAMER', 'HIGH END | Intel Core i9-14900KF 24x3.20GHz | 32Go DDR5 | RTX 5070 Ti 16Go DLSS 4 | 1To M.2 SSD', '{\"Processeur\":\"Intel Core i9-14900KF\",\"Mémoire vive\":\"32GB DDR5 RAM 5600 MHz ADATA\",\"Carte graphique\":\"NVIDIA GeForce RTX 5070 Ti - 16GB\",\"Carte mère\":\"GIGABYTE Z790 Eagle AX DDR5\",\"Disque dur\":\"1000 GB M.2 SSD WD Blue SN5000\"}', 'image/1/PC GAMER HIGH END  Intel Core i9-14900KF 24x3.20GHz  32Go DDR5  RTX 5070 Ti 16Go DLSS 4  1To M.2 SSD.png', 2237.65);
 
 -- --------------------------------------------------------
 
@@ -93,16 +94,16 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `ADMIN` tinyint(1) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `EMAIL` (`EMAIL`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`ID`, `NOM`, `PRENOM`, `EMAIL`, `PASSWORD`, `ADMIN`) VALUES
-(4, 'toto', 'toto', 'toto@toto.to', '111', 1),
-(5, 'Perrat', 'Célian', 'c.perrat@lyceeclaudenougaro82300.onmicrosoft.com', '1234', 1),
-(6, 'dfghgfdhfgh', 'dgfdfgfd', 'toto@toto.tod', '123', 0);
+(1, 'Ozier', 'Noann', 'n.ozier@lyceeclaudenougaro82300.onmicrosoft.com', '$2y$10$xjPoC47t9lACNBS4xn.77OdyOGC5N6LTEO9UHCmtIwm7dApiXQn6e', 1),
+(2, 'Perrat', 'Célian', 'c.perrat@lyceeclaudenougaro82300.onmicrosoft.com', '$2y$10$IGZR0lgaKkUPjATuOA1LiO3uWhdgnUniohUDaCj8AS3heY/oUF.YK', 1),
+(4, 'Toto', 'Tod', 'toto@toto.tod', '123', 0);
 
 --
 -- Contraintes pour les tables déchargées

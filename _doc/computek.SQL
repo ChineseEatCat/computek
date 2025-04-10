@@ -12,8 +12,7 @@ CREATE TABLE IF NOT EXISTS CATEGORIE
    LIBELLE VARCHAR(30) NOT NULL  ,
    IMAGE VARCHAR(128) NOT NULL  
    , PRIMARY KEY (ID) 
- ) 
- comment = "";
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 # -----------------------------------------------------------------------------
 #       TABLE : PRODUITS
@@ -23,14 +22,13 @@ CREATE TABLE IF NOT EXISTS PRODUITS
  (
    ID INTEGER(2) NOT NULL AUTO_INCREMENT ,
    ID_CATEGORIE INTEGER(2) NOT NULL  ,
-   MARQUE VARCHAR(20) NOT NULL  ,
-   MODEL VARCHAR(15) NOT NULL  ,
-   DESCRIPTION VARCHAR(128) NOT NULL  ,
-   IMAGE VARCHAR(128) NOT NULL  ,
+   MARQUE VARCHAR(50) NOT NULL  ,
+   MODEL VARCHAR(150) NOT NULL  ,
+   DESCRIPTION VARCHAR(400) NOT NULL  ,
+   IMAGE VARCHAR(150) NOT NULL  ,
    PRIX DECIMAL(10,2) NOT NULL  
    , PRIMARY KEY (ID) 
- ) 
- comment = "";
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 # -----------------------------------------------------------------------------
 #       INDEX DE LA TABLE PRODUITS
@@ -47,14 +45,14 @@ CREATE  INDEX I_FK_PRODUITS_CATEGORIE
 CREATE TABLE IF NOT EXISTS UTILISATEURS
  (
    ID INTEGER(2) NOT NULL AUTO_INCREMENT ,
-   NOM VARCHAR(15) NOT NULL  ,
-   PRENOM CHAR(32) NOT NULL  ,
+   NOM VARCHAR(30) NOT NULL  ,
+   PRENOM CHAR(30) NOT NULL  ,
    EMAIL VARCHAR(50) NOT NULL  ,
    PASSWORD VARCHAR(256) NOT NULL ,
    ADMIN TINYINT(1) NOT NULL DEFAULT 0
-   , PRIMARY KEY (ID) 
- ) 
- comment = "";
+   , PRIMARY KEY (ID),
+   UNIQUE KEY `EMAIL` (`EMAIL`)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 # -----------------------------------------------------------------------------
