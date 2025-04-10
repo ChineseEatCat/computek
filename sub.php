@@ -2,27 +2,73 @@
 
 include 'header.php';
 
-var_dump($_POST);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['email'], $_POST['pass'], $_POST['repass'], $_POST['nom'], $_POST['prenom'])) {
+        // Vérification si les mots de passe correspondent
+        if ($_POST['pass'] !== $_POST['repass']) {
+            echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erreur',
+                    text: 'Les mots de passe ne correspondent pas.'
+                });
+            </script>";
+        } else {
+            // Vérification si l'email existe déjà
+            $sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email';
+            $stmt = $db->prepare($sql);
+            $stmt->execute([':email' => $_POST['email']]);
+            $resultat = $stmt->fetch();
 
-if (isset($_POST['email'])) {
-    $sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email';
-    $stmt = $db->prepare($sql);
-    $stmt->execute([':email' => $_POST['email']]);
-    $resultat = $stmt->fetch();
-}
+            if ($resultat) {
+                echo "<script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erreur',
+                        text: 'Cet email est déjà utilisé.'
+                    });
+                </script>";
+            } else {
+                // Insertion de l'utilisateur
+                $sql = 'INSERT INTO utilisateurs (NOM, PRENOM, EMAIL, PASSWORD) VALUES (:nom, :prenom, :email, :pass)';
+                $stmt = $db->prepare($sql);
+                $password = password_hash($_POST['pass'], PASSWORD_BCRYPT);
+                $stmt->execute([
+                    ':nom' => $_POST['nom'],
+                    ':prenom' => $_POST['prenom'],
+                    ':email' => $_POST['email'],
+                    ':pass' => $password
+                ]);
 
-if ($_POST['pass'] == $_POST['repass']) {
-    echo 'ok';
-} else {
-    echo 'non';
-}
+                // Création de la session utilisateur
+                $_SESSION['user'] = [
+                    'utilisateur' => $_POST['prenom'],
+                    'email' => $_POST['email'],
+                    'role' => 'user' // Par défaut, rôle utilisateur
+                ];
 
-if ($_POST['pass'] == $_POST['repass'] && $resultat == false) {
-    $sql = 'INSERT INTO utilisateurs (NOM, PRENOM, EMAIL, PASSWORD) VALUES (:nom, :prenom, :email, :pass)';
-    $stmt = $db->prepare($sql);
-    $stmt->execute([':nom' => $_POST['nom'], ':prenom' => $_POST['prenom'], ':email' => $_POST['email'], ':pass' => $_POST['pass']]);
-    $_SESSION['user'] = ['utilisateur' => $_POST['prenom'], 'email' => $_POST['email'], 'password' => $_POST['pass'], 'role' => ($resultat['ADMIN'] == 1 ? 'admin' : 'user')];
-    header('Location: user.php');
+                // Message de succès et redirection
+                echo "<script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Inscription réussie',
+                        text: 'Votre compte a été créé avec succès !'
+                    }).then(() => {
+                        window.location.href = 'user.php';
+                    });
+                </script>";
+                exit;
+            }
+        }
+    } else {
+        echo "<script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: 'Veuillez remplir tous les champs.'
+            });
+        </script>";
+    }
 }
 
 ?>
