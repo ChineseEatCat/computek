@@ -5,7 +5,6 @@ $sql_categorie = 'SELECT * FROM categorie WHERE ID=:id';
 $categories = $db->prepare($sql_categorie);
 $categories->execute([':id' => $_GET['id']]);
 
-
 $sql_produit = 'SELECT * FROM produits WHERE ID_CATEGORIE=:id';
 $produits = $db->prepare($sql_produit);
 $produits->execute([':id' => $_GET['id']]);

@@ -6,14 +6,24 @@ include 'testadmin.php';
 
 $id = $_GET['id'] ?? null;
 
-if (isset($_POST) && !empty($_POST) && $_POST['pass'] == $_POST['repass']) {
+if (isset($_POST) && !empty($_POST) && $_POST['pass'] === $_POST['repass']) {
+    // Hachage du mot de passe avec BCRYPT
+    $hashedPassword = password_hash($_POST['pass'], PASSWORD_BCRYPT);
 
-    var_dump($_POST);
     $sql = 'UPDATE utilisateurs SET NOM = ?, PRENOM = ?, EMAIL = ?, PASSWORD = ?, ADMIN = ? WHERE ID = ?';
     $stmt = $db->prepare($sql);
-    $stmt->execute([$_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['pass'], $_POST['role'], $id]);
+    $stmt->execute([
+        $_POST['nom'],
+        $_POST['prenom'],
+        $_POST['email'],
+        $hashedPassword,
+        $_POST['role'],
+        $id
+    ]);
 
+    // Redirection après modification
     header('Location: panel.php');
+    exit;
 }
 
 if (!empty($_GET['id'])) {

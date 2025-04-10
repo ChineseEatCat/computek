@@ -6,10 +6,6 @@ include 'testadmin.php';
 //Vérification des champs
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['category_name']) && isset($_FILES['category_image'])) {
 
-    //Connexion à la base de données
-    $db = new PDO('mysql:host=localhost;dbname=computek', 'root', '');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     $stmt = $db->prepare('INSERT INTO categorie (libelle, image) VALUES (:category_name, :category_image)');
     $stmt->bindParam(':category_name', $_POST['category_name']);
     $stmt->bindParam(':category_image', $_FILES['category_image']['name']);

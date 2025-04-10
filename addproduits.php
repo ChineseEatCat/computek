@@ -124,10 +124,12 @@ if (!empty($_POST['MARQUE']) || !empty($_POST['MODEL']) || !empty($_POST['PRIX']
             <label for="IMAGE">Image du produit :</label><br>
             <input type="file" id="IMAGE" name="IMAGE" accept="image/*" placeholder="Image du produit" required><br>
 
-            <label for="CARACTERISTIQUES">Caractéristiques du produit :</label><br>
-            <textarea style="min-height: 20vh; min-width: 30vh" type="text" name="CARACTERISTIQUES" placeholder="Caractéristiques: données, 
-du: données,
-produit: données" value="<?php if (isset($_POST['CARACTERISTIQUES'])) {
+            <label for="CARACTERISTIQUES">Caractéristiques du produit : (minimum 2 lignes)</label><br>
+            <textarea style="min-height: 20vh; min-width: 30vh" type="text" name="CARACTERISTIQUES" placeholder="Exemple : 
+Processeur: Intel Core i7,
+RAM: 16 Go,
+Stockage: 512 Go SSD,
+Carte Graphique: NVIDIA RTX 3060" value="<?php if (isset($_POST['CARACTERISTIQUES'])) {
                                 echo $_POST['CARACTERISTIQUES'];
                             } ?>"></textarea><br>
 
