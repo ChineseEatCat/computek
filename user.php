@@ -4,56 +4,54 @@ include 'header.php';
 
 include 'testuser.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deconnexion']) && $_POST['deconnexion'] === 'disconnect') {
-    // Se deconnecter
-    $_SESSION['user'] = [];
-
-    header('Location: connexion.php');
-}else if (isset($_GET['deconnexion']) && $_GET['deconnexion'] === 'disconnect') {
-    // Détruire la session
-    session_start();
+if (isset($_GET['deconnexion']) && $_GET['deconnexion'] === 'disconnect') {
+    // Déconnexion : vider la session et rediriger
     session_destroy();
-
-    // Rediriger sur la page précédente avec php
-    $previousPage = $_SERVER['HTTP_REFERER'];
-    if (isset($previousPage)) {
-        header('Location: ' . $previousPage);
-    } else {
-        header('Location: index.php');
-    }
+    header('Location: connexion.php');
     exit;
 }
 
+// Gestion des actions utilisateur (déconnexion ou suppression de compte)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['suppruser']) && $_POST['suppruser'] === 'supprimer') {
-    $sql = 'DELETE FROM utilisateurs WHERE EMAIL = :email';
-    $stmt = $db->prepare($sql);
-    $stmt->execute([':email' => $_SESSION['user']['email']]);
-
-    $_SESSION['user'] = [];
-    
-    header('Location: connexion.php');
+    if (isset($_POST['suppruser']) && $_POST['suppruser'] === 'supprimer') {
+        // Suppression du compte
+        $sql = 'DELETE FROM utilisateurs WHERE EMAIL = :email';
+        $stmt = $db->prepare($sql);
+        $stmt->execute([':email' => $_SESSION['user']['email'] ?? '']);
+        session_destroy();
+        header('Location: connexion.php');
+        exit;
+    }
 }
 
-$sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email AND PASSWORD = :password';
+// Récupération des informations utilisateur depuis la base
+$email = $_SESSION['user']['email'] ?? '';
+$sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email';
 $stmt = $db->prepare($sql);
-$stmt->execute([':email' => $_SESSION['user']['email'], ':password' => $_SESSION['user']['password']]);
-$resultat = $stmt->fetch();
+$stmt->execute([':email' => $email]);
+$user = $stmt->fetch();
 
+if (!$user) {
+    // Si l'utilisateur n'existe pas, rediriger vers la page de connexion
+    session_destroy();
+    header('Location: connexion.php');
+    exit;
+}
 ?>
 
 <main>
-    <h1>Bonjour <?= $_SESSION['user']['utilisateur']?></h1>
+    <h1>Bonjour <?= htmlspecialchars($user['PRENOM'])?></h1>
     <div class="user-box">
         <h4>INFORMATION</h4>
         <hr>
         <div class="info-user">
             <div class="nom-prenom-user">
-                <p>Nom : <?= $resultat['NOM'] ?></p>
-                <p>Prénom : <?= $resultat['PRENOM'] ?></p>
-                <p>Rôle : <?= ($resultat['ADMIN'] == 1 ? 'Administrateur' : 'Utilisateur') ?></p>
+                <p>Nom : <?= $user['NOM'] ?></p>
+                <p>Prénom : <?= $user['PRENOM'] ?></p>
+                <p>Rôle : <?= ($user['ADMIN'] == 1 ? 'Administrateur' : 'Utilisateur') ?></p>
             </div>
-            <p>Email : <?= $resultat['EMAIL'] ?></p>
+            <p>Email : <?= $user['EMAIL'] ?></p>
         </div>
         <h4>Modification du mot de passe</h4>
         <hr>

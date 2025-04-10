@@ -4,38 +4,46 @@ include 'header.php';
 
 include 'testuser.php';
 
-$sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email AND PASSWORD = :password';
+// Récupérer l'utilisateur depuis la base de données
+$sql = 'SELECT * FROM utilisateurs WHERE EMAIL = :email';
 $stmt = $db->prepare($sql);
-$stmt->execute([':email' => $_SESSION['user']['utilisateur'], ':password' => $_SESSION['user']['password']]);
-$result = $stmt->fetch();
+$stmt->execute([':email' => $_SESSION['user']['email']]);
+$user = $stmt->fetch();
 
+// Vérifier si l'ancien mot de passe est correct et si les nouveaux mots de passe correspondent
+if (password_verify($_POST['oldpass'], $user['PASSWORD']) && $_POST['newpass'] === $_POST['confirmation'] && !empty($_POST['newpass'])) {
+    // Hacher le nouveau mot de passe avec bcrypt
+    $hashedPassword = password_hash($_POST['newpass'], PASSWORD_BCRYPT);
 
-if ($result['PASSWORD'] == $_POST['oldpass'] && $_POST['newpass'] == $_POST['confirmation'] && !empty($_POST['newpass'])) {
+    // Mettre à jour le mot de passe dans la base de données
     $sql = 'UPDATE utilisateurs SET PASSWORD = :password WHERE EMAIL = :email';
     $stmt = $db->prepare($sql);
-    $stmt->execute([':password' => $_POST['newpass'], ':email' => $_SESSION['user']['utilisateur']]);
-    $_SESSION['user']['password'] = $_POST['newpass'];
+    $stmt->execute([':password' => $hashedPassword, ':email' => $_SESSION['user']['email']]);
+
+    // Mettre à jour la session utilisateur
+    $_SESSION['user']['password'] = $hashedPassword;
+
     echo "<script>Swal.fire({
         icon: 'success',
         title: 'Modification du mot de passe',
-        text: 'Le mot de passe a été modifier avec succès.',
+        text: 'Le mot de passe a été modifié avec succès.',
     }).then(function() {
         window.location.href = 'user.php';
     });</script>";
+} else {
+    // Si la vérification échoue, afficher un message d'erreur
+    echo "<script>Swal.fire({
+        icon: 'error',
+        title: 'Erreur',
+        text: 'Ancien mot de passe incorrect ou les nouveaux mots de passe ne correspondent pas.',
+    }).then(function() {
+        window.location.href = 'modifpassword.php';
+    });</script>";
 }
-
 ?>
 
-<?php
-if ($result['PASSWORD'] != $_POST['oldpass'] || $_POST['newpass'] != $_POST['confirmation'] || empty($_POST['newpass'])) {
-?>
 <div class="user-box">
     <h4>Modification du mot de passe</h4>
-    <?php
-    if ($result['PASSWORD'] != $_POST['oldpass'] || $_POST['newpass'] != $_POST['confirmation'] || empty($_POST['newpass'])) {
-        echo "<p class='msg-error'>*Mot de passe ou nouveau mot de passe incorrect*</p>";
-    }
-    ?>
     <hr>
     <div class="info-user">
         <form class="modif-password" method="post" action="modifpassword.php">
@@ -49,6 +57,3 @@ if ($result['PASSWORD'] != $_POST['oldpass'] || $_POST['newpass'] != $_POST['con
         </form>
     </div>
 </div>
-<?php
-}
-?>
