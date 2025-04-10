@@ -120,7 +120,7 @@ if (!empty($search)) {
 
     <!-- Section Utilisateurs -->
     <h2>Gestion des Utilisateurs</h2>
-    <a href="sub.php" class="ajouter"><i class="bi bi-plus-circle"></i> Ajouter un utilisateur</a>
+    <a href="adduser.php" class="ajouter"><i class="bi bi-plus-circle"></i> Ajouter un utilisateur</a>
     <table class="admin-table">
         <thead>
             <tr>

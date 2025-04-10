@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
         <label>E-mail :</label>
-        <input type="email" name="email" value="<?= (isset($_POST['email']) && $resultat == false ? $_POST['email'] : 'error') ?>">
+        <input type="email" name="email" value="<?= (isset($_POST['email']) && $resultat == false ? $_POST['email'] : '') ?>">
         <label>Mot de passe :</label>
         <input type="password" name="pass">
         <label>Confirmation mot de passe :</label>
