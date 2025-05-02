@@ -25,7 +25,7 @@ $sorties->execute();
 		?>
 
 		<div class="produits">
-			<img style="width: 300px; height:100%" src="<?= $recommandation1['IMAGE'] ?>">
+			<img class="produit-img" src="<?= $recommandation1['IMAGE'] ?>">
 			<div>
 				<p><?= $recommandation1['MARQUE'] . " " . $recommandation1['MODEL'] ?></p>
 				<div class="caracteristiques">
@@ -54,7 +54,7 @@ $sorties->execute();
 		</div>
 
 		<div class="produits">
-			<img style="width: 300px; height:100%" src="<?= $recommandation2['IMAGE'] ?>">
+			<img class="produit-img" src="<?= $recommandation2['IMAGE'] ?>">
 			<div>
 				<p><?= $recommandation2['MARQUE'] . " " . $recommandation2['MODEL'] ?></p>
 				<div class="caracteristiques">
@@ -83,7 +83,7 @@ $sorties->execute();
 		</div>
 
 		<div class="produits">
-			<img style="width: 300px; height:100%" src="<?= $recommandation3['IMAGE'] ?>">
+			<img class="produit-img" src="<?= $recommandation3['IMAGE'] ?>">
 			<div>
 				<p><?= $recommandation3['MARQUE'] . " " . $recommandation3['MODEL'] ?></p>
 					<div class="caracteristiques">
@@ -118,7 +118,7 @@ $sorties->execute();
 		<?php
 		foreach ($sorties as $k => $produit) : ?>
 			<div class="produits">
-				<img style="width:300px; height:100%" src="<?= $produit['IMAGE'] ?>" alt="">
+				<img class="produit-img" src="<?= $produit['IMAGE'] ?>" alt="">
 				<div>
 					<p><?= $produit['MARQUE'] . " " . $produit['MODEL'] ?></p>
 					<div class="caracteristiques">

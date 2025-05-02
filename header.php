@@ -5,12 +5,12 @@ $totalQuantite = 0;
 include 'config/bdd.php';
 
 if (!empty($_SESSION['user'])) {
-    $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE EMAIL = ?');
-    $stmt->execute([$_SESSION['user']['email']]);
-    $user = $stmt->fetch();
+	$stmt = $db->prepare('SELECT * FROM utilisateurs WHERE EMAIL = ?');
+	$stmt->execute([$_SESSION['user']['email']]);
+	$user = $stmt->fetch();
 
-    // Met à jour le rôle en fonction de la valeur de ADMIN (1 pour admin, sinon user)
-    $_SESSION['user']['role'] = (isset($user['ADMIN']) && $user['ADMIN'] == 1) ? 'admin' : 'user';
+	// Met à jour le rôle en fonction de la valeur de ADMIN (1 pour admin, sinon user)
+	$_SESSION['user']['role'] = (isset($user['ADMIN']) && $user['ADMIN'] == 1) ? 'admin' : 'user';
 }
 
 // Calculer le nombre total d'articles dans le panier
@@ -34,11 +34,21 @@ if (isset($_SESSION['panier'])) {
 	<link rel="shortcut icon" href="logo.png" type="image/x-icon">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 	<header>
 		<div class="nav">
+			<!-- Champ checkbox pour contrôler l'affichage du menu sur mobile -->
+			<input type="checkbox" id="hamburger-toggle">
+			<!-- Bouton hamburger visible uniquement sur petits écrans -->
+			<label for="hamburger-toggle" class="hamburger">
+				<span></span>
+				<span></span>
+				<span></span>
+			</label>
+
 			<nav>
 				<ul>
 					<li><a href="index.php">Accueil</a></li>
@@ -73,5 +83,4 @@ if (isset($_SESSION['panier'])) {
 				</nav>
 			</div>
 		<?php endif; ?>
-
 	</header>

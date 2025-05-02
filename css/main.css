@@ -95,21 +95,6 @@ body {
   content: "> ";
 }
 
-
-@media screen and (min-width: 480px) and (max-width: 980px) {
-  .categories {
-    max-width: 95% !important;
-  }
-
-  .container {
-    max-width: 90% !important;
-  }
-
-  .produits {
-    max-width: 30% !important;
-  }
-}
-
 /* Bouton Ajouter Panier */
 a.cart {
   background-color: #333;
@@ -188,4 +173,67 @@ a.ajouter {
 
 a.ajouter:hover {
   background-color: darkgreen;
+}
+
+/* Responsive adjustments for mobiles (max-width: 480px) */
+@media screen and (max-width: 480px) {
+  /* Forcer les conteneurs à occuper 100% de la largeur */
+  .categories {
+    max-width: 100% !important;
+    gap: 10px;
+    padding: 0 10px;
+  }
+  
+  /* Les produits s'affichent en pleine largeur avec un peu de marge */
+  .produits {
+    max-width: 100% !important;
+    width: 100%;
+    margin: 10px auto;
+    padding: 10px;
+  }
+  
+  /* Faire en sorte que les images s'ajustent au conteneur */
+  .produits img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Réduire la taille du texte pour améliorer la lisibilité */
+  .produits p {
+    font-size: 18px;
+    height: auto;
+    line-height: 1.2;
+  }
+  
+  /* Ajuster le menu et les formulaires si nécessaire */
+  header,
+  nav ul {
+    width: 100%;
+  }
+  
+  /* Si vous utilisez un menu responsive, assurez-vous que les éléments s'empilent correctement */
+  nav ul li {
+    margin: 10px 0;
+  }
+}
+
+/* Responsive adjustments for tablettes (max-width: 980px) */
+@media screen and (min-width: 481px) and (max-width: 980px) {
+  /* Réduire légèrement l'espace entre les produits */
+  .categories {
+    max-width: 95% !important;
+  }
+  
+  .produits {
+    max-width: 45% !important;
+  }
+  
+  .produits p {
+    font-size: 18px;
+  }
+  
+  /* Pour que le formulaire (si présent) s'ajuste bien */
+  .container {
+    max-width: 90% !important;
+  }
 }

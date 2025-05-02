@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['category_name']) && is
 <style>
     /* Bouton */
     button[type="submit"] {
-        width: 100%;
+        max-width: 90%;
         padding: 10px;
         background-color: #007bff;
         color: #fff;

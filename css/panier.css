@@ -57,3 +57,78 @@ td.total-intermediaire {
 .resume div p.prix {
   margin-left: auto;
 }
+
+/* Responsive pour le panier sur mobiles */
+/* Pour les écrans de moins de 768px, par exemple */
+@media screen and (max-width: 768px) {
+  /* Le conteneur global passe en colonne */
+  div.liste-panier {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Ajuster la largeur des sections du panier */
+  .panier {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /* La colonne "resultat" prend toute la largeur */
+  div.resultat {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  /* Le tableau s'affiche en défilement horizontal si nécessaire */
+  .panier table {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
+
+  /* Ajuster les cellules pour un affichage compact */
+  td, th {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  /* Centrer le contenu et éviter les débordements */
+  td.quantite,
+  td.prix-unitaire,
+  td.total-intermediaire {
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+
+/* Responsive spécifique pour les très petits écrans (max-width: 480px) */
+@media screen and (max-width: 480px) {
+  /* Réduire les marges et augmenter l'espacement vertical */
+  div.liste-panier {
+    gap: 10px;
+    padding: 0 5px;
+  }
+
+  .panier {
+    max-width: 100%;
+  }
+  
+  div.resultat {
+    width: 90%;    /* réduire la largeur pour laisser apparaître le padding */
+    margin: 10px auto;  /* centrer et ajuster la marge verticale */
+    padding: 10px; /* conserver un padding léger pour le contenu */
+  }
+  
+  /* Adapter la taille du texte du tableau */
+  td, th {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  /* Pour les images dans le tableau */
+  td.produit div img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+  }
+}
