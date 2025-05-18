@@ -20,7 +20,7 @@ Ce projet est une simulation d’un site e-commerce réalisée dans le cadre du 
 
 1. Clonez le dépôt :
     ```bash
-    git clone https://github.com/votre-utilisateur/computek.git
+    git clone https://github.com/ChineseEatCat/computek.git
     ```
 2. Placez le projet sur un serveur local (ex. XAMPP, WAMP, etc.) ou sur un hébergement compatible PHP.
 3. Accédez au projet via votre navigateur pour tester la simulation de commande et le formulaire de paiement.
@@ -28,10 +28,10 @@ Ce projet est une simulation d’un site e-commerce réalisée dans le cadre du 
 ## Utilisation
 
 - **Ajout/gestion du panier** :  
-  Le panier doit être initialisé au préalable. Chaque produit contient des informations telles que l’image, la marque, le modèle, le prix et la quantité.
+  La session, créée automatiquement par le navigateur, gère le panier. Chaque produit ajouté y conserve des informations telles que l’image, la marque, le modèle, le prix et la quantité.
 
 - **Paiement** :  
-  Remplissez le formulaire pour simuler le paiement. Une alerte JavaScript (par exemple via Swal.fire) confirmera la réussite de l’opération et redirigera l’utilisateur vers la page d’accueil.
+  Remplissez le formulaire pour simuler le paiement. Une alerte JavaScript (par exemple via SweetAlert) confirmera la réussite de l’opération et redirigera l’utilisateur vers la page d’accueil.
 
 > **Attention :** Ce projet est une simulation dans le cadre d’un travail scolaire. Aucun paiement réel n’est effectué et aucune donnée sensible n’est traitée.
 
