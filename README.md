@@ -23,8 +23,7 @@ Ce projet est une simulation d’un site e-commerce réalisée dans le cadre du 
     git clone https://github.com/votre-utilisateur/computek.git
     ```
 2. Placez le projet sur un serveur local (ex. XAMPP, WAMP, etc.) ou sur un hébergement compatible PHP.
-3. Configurez une session PHP et initialisez la variable `$_SESSION['panier']`.
-4. Accédez au projet via votre navigateur pour tester la simulation de commande et le formulaire de paiement.
+3. Accédez au projet via votre navigateur pour tester la simulation de commande et le formulaire de paiement.
 
 ## Utilisation
 
